@@ -1,0 +1,414 @@
+[{
+  "_id": {
+    "$oid": "63f4ea42a350ce7a5cdb1e03"
+  },
+  "filtersObject": {
+    "body_type": {
+      "title": "Body Type",
+      "type": "dropdown",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": true,
+      "sortable": true,
+      "options": [
+        {
+          "data": "null",
+          "display": "Any"
+        },
+        {
+          "data": "Muscular",
+          "display": "Muscular"
+        },
+        {
+          "data": "Athletic",
+          "display": "Athletic"
+        },
+        {
+          "data": "Slim",
+          "display": "Slim"
+        },
+        {
+          "data": "Thin",
+          "display": "Thin"
+        },
+        {
+          "data": "Average",
+          "display": "Average"
+        },
+        {
+          "data": "Curvy",
+          "display": "Curvy"
+        },
+        {
+          "data": "Chubby",
+          "display": "Chubby"
+        },
+        {
+          "data": "BBW",
+          "display": "BBW"
+        },
+        {
+          "data": "SSBBW",
+          "display": "SSBBW"
+        }
+      ],
+      "path": "body_type"
+    },
+    "eye_color": {
+      "title": "Eye Color",
+      "type": "dropdown",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": true,
+      "options": [
+        {
+          "data": "null",
+          "display": "Any"
+        },
+        {
+          "data": "Blue",
+          "display": "Blue"
+        },
+        {
+          "data": "Green",
+          "display": "Green"
+        },
+        {
+          "data": "Gray",
+          "display": "Gray"
+        },
+        {
+          "data": "Hazel",
+          "display": "Hazel"
+        },
+        {
+          "data": "Brown",
+          "display": "Brown"
+        },
+        {
+          "data": "Heterochromia",
+          "display": "Heterochromia"
+        }
+      ],
+      "path": "eye_color"
+    },
+    "hair_color": {
+      "title": "Hair Color",
+      "type": "dropdown",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": true,
+      "options": [
+        {
+          "data": "null",
+          "display": "Any"
+        },
+        {
+          "data": "Blonde",
+          "display": "Blonde"
+        },
+        {
+          "data": "Red",
+          "display": "Red"
+        },
+        {
+          "data": "Brown",
+          "display": "Brown"
+        },
+        {
+          "data": "Black",
+          "display": "Black"
+        },
+        {
+          "data": "Colored",
+          "display": "Colored"
+        }
+      ],
+      "path": "hair_color"
+    },
+    "hair_length": {
+      "title": "Hair Length",
+      "type": "dropdown",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": true,
+      "options": [
+        {
+          "data": "null",
+          "display": "Any"
+        },
+        {
+          "data": "Very Short",
+          "display": "Very Short"
+        },
+        {
+          "data": "Short",
+          "display": "Short"
+        },
+        {
+          "data": "Medium",
+          "display": "Medium"
+        },
+        {
+          "data": "Long",
+          "display": "Long"
+        },
+        {
+          "data": "Very Long",
+          "display": "Very Long"
+        }
+      ],
+      "path": "hair_length"
+    },
+    "hair_shape": {
+      "title": "Hair Shape",
+      "type": "dropdown",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": true,
+      "options": [
+        {
+          "data": "null",
+          "display": "Any"
+        },
+        {
+          "data": "Straight",
+          "display": "Blonde"
+        },
+        {
+          "data": "Wavy",
+          "display": "Red"
+        },
+        {
+          "data": "Curly",
+          "display": "Brown"
+        },
+        {
+          "data": "Afro",
+          "display": "Black"
+        }
+      ],
+      "path": "hair_shape"
+    },
+    "natural_boobs": {
+      "title": "Natural Boobs",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "natural_boobs"
+    },
+    "pierced_nipples": {
+      "title": "Pierced Nipples",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "pierced_nipples"
+    },
+    "underarm_hair": {
+      "title": "Underarm Hair",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "underarm_hair"
+    },
+    "topless": {
+      "title": "Topless",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "topless"
+    },
+    "bush": {
+      "title": "Bush",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "bush"
+    },
+    "frontal": {
+      "title": "Frontal",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "frontal"
+    },
+    "pink": {
+      "title": "Pink",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "pink"
+    },
+    "solo": {
+      "title": "Solo",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "solo"
+    },
+    "solo_dildo": {
+      "title": "Solo Dildo",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "solo_dildo"
+    },
+    "solo_fisting": {
+      "title": "Solo Fisting",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "solo_fisting"
+    },
+    "lesbian": {
+      "title": "Lesbian",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "lesbian"
+    },
+    "blowjob": {
+      "title": "Blowjob",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "blowjob"
+    },
+    "hardcore": {
+      "title": "Hardcore",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "hardcore"
+    },
+    "anal": {
+      "title": "Anal",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "anal"
+    },
+    "dp": {
+      "title": "Double Penetration",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "dp"
+    },
+    "fisting": {
+      "title": "Fisting",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "fisting"
+    },
+    "creampie": {
+      "title": "Creampie",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "creampie"
+    },
+    "bondage": {
+      "title": "Bondage",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "bondage"
+    },
+    "bukkake": {
+      "title": "Water Sports",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "bukkake"
+    },
+    "watersports": {
+      "title": "Water Sports",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "watersports"
+    },
+    "fisting_men": {
+      "title": "Fisting Men",
+      "type": "boolean",
+      "data": null,
+      "visible": false,
+      "columnable": true,
+      "isColumn": false,
+      "sortable": false,
+      "path": "fisting_men"
+    }
+  },
+  "__v": 0
+}]

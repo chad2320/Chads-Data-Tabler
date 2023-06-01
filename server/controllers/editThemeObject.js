@@ -8,13 +8,17 @@ const editThemeObject = asyncWrapper(async (req, res, next) =>{
   try {
     //console.log('Req Body\n', req.body);
     const result = await controls.updateOne({}, { theme: req.body });
-
-    if (result.nModified === 1) {
+    
+    if (result.modifiedCount === 1) {
       //console.log('Saved new theme colors.');
       res.status(200).json({ message: 'Theme updated successfully' });
-    } else {
+    } else if(matchedCount === 0) {
       //console.log('No documents matched the filter.');
-      res.status(404).json({ message: 'Theme not found' });
+      let newTheme = controls({theme:req.body})
+      await newTheme.save();
+      res.status(200).json({ message: 'Theme created successfully' });
+    } else {
+      res.status(200).json({message: 'No changes detected.'})
     }
   } catch (error) {
     //console.log(error);

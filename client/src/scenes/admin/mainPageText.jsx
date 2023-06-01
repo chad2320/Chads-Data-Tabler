@@ -26,7 +26,7 @@ const MainPageText = () => {
             >
                 <Button
                     variant="outlined"
-                    href="https://github.com/chad2320/Transition-Collection"
+                    href="https://github.com/chad2320/Chads-Data-Tabler"
                 >
                     Github
                 </Button>

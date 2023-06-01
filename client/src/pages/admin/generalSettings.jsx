@@ -1,25 +1,18 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import TopBar from "../../scenes/admin/adminTopbar";
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const GeneralSettings = (props) => {
-    const envVars = Object.keys(process.env);
+const GeneralSettings = () => {
     return(
         <Box>
-        <TopBar/>
-        <div>
-      <h2>Environment Variables</h2>
-      <ul>
-        {envVars.map((key) => (
-          <li key={key}>
-            {key}: {process.env[key]}
-          </li>
-        ))}
-      </ul>
-    </div>
+          <TopBar/>
+          
+          <Typography>
+            Nothing to show here yet.
+          </Typography> 
 
         </Box>
     )

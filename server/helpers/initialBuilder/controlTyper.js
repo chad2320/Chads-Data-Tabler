@@ -8,7 +8,7 @@ let theTyper = (valueTypes)=>{
         return 'boolean'
     } else if(valueTypePrimary == 'string' && valueTypes.string < 30){
         return 'dropdown'
-    } else if(valueTypePrimary == 'string' && valueTypes.string <= 20){
+    } else if(valueTypePrimary == 'string' && valueTypes.string <= 30){
         return 'check'
     } else if(valueTypePrimary == 'number'){
         return 'range'

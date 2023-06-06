@@ -7,7 +7,6 @@ import {useSearch} from "../../../utils/filterSearch";
 
 const CustomDataTable = () => {
     const {tableData} = useSearch()
-        
     if(tableData){
         return (
             <Fade 
@@ -15,18 +14,13 @@ const CustomDataTable = () => {
                 timeout={250}
             >
                 <Box 
-                    sx={{pl:1,pr:1}}
+                    sx={{mt:1,pl:0.5,pr:0.5}}
                 >
-                    <ControlsLine />
+                    {(tableData.length != 0) ? <ControlsLine /> : null}
                     <ColumnsLine />
                     <ListDisplay />
-                    
                 </Box>
             </Fade> 
-        )} else {
-            return (
-            <Box>
-            </Box>
         )}
     }
 

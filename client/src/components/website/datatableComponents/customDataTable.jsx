@@ -9,14 +9,11 @@ const CustomDataTable = () => {
     const {tableData} = useSearch()
     if(tableData){
         return (
-            <Fade 
-                in 
-                timeout={250}
-            >
+            <Fade in timeout={250}>
                 <Box 
                     sx={{mt:1,pl:0.5,pr:0.5}}
                 >
-                    {(tableData.length != 0) ? <ControlsLine /> : null}
+                    {(tableData.length !== 0) ? <ControlsLine /> : null}
                     <ColumnsLine />
                     <ListDisplay />
                 </Box>

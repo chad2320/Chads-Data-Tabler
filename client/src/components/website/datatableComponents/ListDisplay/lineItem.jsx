@@ -1,10 +1,10 @@
-import { Box, Typography,Fade} from "@mui/material"
+import { Box, Typography} from "@mui/material"
 import Grid from "@mui/material/Grid";
 import LineItemData from "./lineItemDataDisplay";
 import React from 'react';
 
 const LineItem = (props) => {
-    const {tableData,data,wait} = props
+    const {tableData,data} = props
 
     function flattenObject(obj, prefix = '') {
         let flattenedObj = {};
@@ -22,12 +22,7 @@ const LineItem = (props) => {
       }
 
     return (
-        <Fade 
-            in 
-            timeout={{appear:wait,enter:wait,exit:200}}
-        >
-        {/* Box creating room for permanent columns */}
-        <Box 
+        <Box /* Box creating room for permanent columns */
             sx={{
                 "&:hover": {'backgroundColor': 'secondary.main'}, 
                 minHeight:'10px', 
@@ -82,8 +77,8 @@ const LineItem = (props) => {
                 })}
             </Grid>
         </Box>
-        </Fade>
-    )}
+    )
+}
 
 
 export default LineItem

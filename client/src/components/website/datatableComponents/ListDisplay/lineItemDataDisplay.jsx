@@ -24,8 +24,6 @@ const LineItemData = (props) => {
         return result;
     }
 
-    
-
     if(column === 'Height'){
         return(
             <Box sx={{minWidth:itemWidth,maxWidth:itemWidth}}>

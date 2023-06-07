@@ -34,12 +34,9 @@ const SearchSearchBar = () => {
       // Fetch data from your API based on the input value
       const fetchData = async () => {
         try {
-          console.log('InputValue Shows',inputValue)
           const response = await fetch(`${process.env.REACT_APP_Express_Connection}/search?inputValue=${inputValue}&key=${searchValue[0].key}`);
           const data = await response.json();
-          console.log('Request response',data)
           let formattedData = extractStringsFromArray(data);
-          console.log(formattedData);
       
           // Remove duplicates from the formattedData array
           const uniqueOptions = [...new Set(formattedData)];

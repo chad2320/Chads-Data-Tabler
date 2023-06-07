@@ -40,7 +40,7 @@ const ListDisplay = () => {
                         tableData={x}
                         data={data}
                         controls={controls}
-                        searchValue={searchValue}
+                        searchValue={searchValue[0].key}
                         />
                     </div>
                 </Slide>

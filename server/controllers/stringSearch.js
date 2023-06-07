@@ -3,8 +3,6 @@ require('dotenv').config();
 
 const stringSearch = async (req, res) => {
     const { inputValue, key } = req.query;
-    console.log('InputValue Shows', inputValue);
-    console.log('key Shows', key);
     try {
         const results = await myModel.aggregate([
         {
@@ -25,7 +23,6 @@ const stringSearch = async (req, res) => {
             $limit: 5,
         },
         ]);
-        console.log(results)
         res.json(results);
     } catch (error) {
         console.error('Error searching by key:', error);

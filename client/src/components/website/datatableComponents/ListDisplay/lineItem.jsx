@@ -5,7 +5,7 @@ import React from 'react';
 import BasicModal from "../../../general/basicModal";
 
 const LineItem = (props) => {
-    const {tableData,data,wait,searchValue} = props
+    const {tableData,data,searchValue} = props
 
     //Modal State & Handling
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -31,6 +31,7 @@ const LineItem = (props) => {
         <Box>
         <BasicModal modalOpen={modalOpen} handleModalClose={handleModalClose}/>
         <Box /* Box creating room for permanent columns */
+            onClick={()=>{handleModalOpen()}}
             sx={{
                 "&:hover": {'backgroundColor': 'secondary.main'}, 
                 minHeight:'10px', 

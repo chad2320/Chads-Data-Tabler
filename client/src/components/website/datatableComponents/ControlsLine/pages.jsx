@@ -7,8 +7,7 @@ import { useSearch } from "../../../../utils/filterSearch";
 
 const Pages = () => {
 
-    const {searchCountTotal,searchDatabase,controls,setControls,
-    } = useSearch()
+    const {searchCountTotal,searchDatabase,controls,setControls} = useSearch()
 
     function handleChange(x){
         let temp = controls

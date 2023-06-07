@@ -125,13 +125,6 @@ export const useSearch = () => {
   return useContext(SearchContext)
 }
 
-
-
-
-
-
-
-
 /* Grabs and formats data from state to be used in search */
 const grabData = (x) => {
   //console.log('grabdata starts with',x)

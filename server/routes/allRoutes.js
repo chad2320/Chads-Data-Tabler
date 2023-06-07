@@ -8,6 +8,7 @@ const {editThemeObject} = require('../controllers/editThemeObject')
 const {dbEdit} = require('../controllers/dbCleaner')
 const { deleteControls } = require('../controllers/deleteControls')
 const {userAuth} = require('../controllers/userAuth')
+const { stringSearch } = require('../controllers/stringSearch')
 
 //Website Stuff
 router.route('/tableData').get(getData)
@@ -20,5 +21,6 @@ router.route('/editThemeObject').post(editThemeObject)
 router.route('/userAuth').post(userAuth)
 router.route('/dbEdit').get(dbEdit)
 router.route('/deleteControls').get(deleteControls)
+router.route('/search').get(stringSearch)
 
 module.exports = router

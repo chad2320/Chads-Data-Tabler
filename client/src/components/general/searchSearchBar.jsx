@@ -1,19 +1,26 @@
-import { Autocomplete, TextField, } from "@mui/material"
+import { Autocomplete, TextField,Box } from "@mui/material"
 import React,{useState,useEffect} from 'react';
 import useFetchFilters from '../../utils/filterSearch/useFetchFilters'
+import BasicModal from "./basicModal";
+import SearchIcon from '@mui/icons-material/Search';
 
 const SearchSearchBar = () => {
+    //Search State
     const [inputValue,setInputValue] = useState('')
     const [options,setOptions] = useState([])
     const {searchValue} = useFetchFilters()
-    console.log('options',options)
+
+    //Modal State & Handling
+    const [modalOpen, setModalOpen] = React.useState(false);
+    const handleModalOpen = () => setModalOpen(true);
+    const handleModalClose = () => setModalOpen(false);
 
     function extractStringsFromArray(array) {
       const extractedStrings = [];
     
       for (const object of array) {
         const keys = Object.keys(object);
-        const value = object[keys[0]]; // Assuming each object has only one key-value pair
+        const value = object[keys[0]]; // Assumes each object has only one key-value pair
     
         if (typeof value === 'string') {
           extractedStrings.push(value);
@@ -52,29 +59,37 @@ const SearchSearchBar = () => {
     },[inputValue])
 
     return (
+      <Box>
         <Autocomplete
-        sx={{ width: 300 }}
-        freeSolo
-        id="search bar"
-        disableClearable
-        filterOptions={(x) => x}
-        options={options}
-        inputValue={inputValue}
-        onInputChange={(event, newValue) => {
+          sx={{ width: 300 }}
+          size='small'
+          freeSolo
+          disableClearable
+          id="search bar"
+          filterOptions={(x) => x}
+          options={options}
+          inputValue={inputValue}
+          onInputChange={(event, newValue) => {
             setInputValue(newValue);
           }}
-        noOptionsText="No Results"
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search input"
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
-        )}
-      />
+          onChange={handleModalOpen}
+          noOptionsText="No Results"
+          renderInput={(params) => (
+            <Box display='flex' flexDirection='row' alignItems='center'> 
+              <SearchIcon/>
+              <TextField
+                {...params}
+                variant='standard'
+                size='small'
+                InputProps={{
+                  ...params.InputProps
+                }}
+              />
+            </Box>
+          )}
+        />
+        <BasicModal modalOpen={modalOpen} handleModalClose={handleModalClose}/>
+      </Box>
 
     )
 }

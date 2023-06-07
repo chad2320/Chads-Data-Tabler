@@ -5,7 +5,7 @@ import React from 'react';
 import BasicModal from "../../../general/basicModal";
 
 const LineItem = (props) => {
-    const {tableData,data,wait} = props
+    const {tableData,data,wait,searchValue} = props
 
     //Modal State & Handling
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -60,7 +60,7 @@ const LineItem = (props) => {
                 >
                 <Typography variant='h5' noWrap>
                     {
-                        tableData.name ? tableData.name : tableData.title
+                        tableData[searchValue]
                     }
                 </Typography>
             </Box>

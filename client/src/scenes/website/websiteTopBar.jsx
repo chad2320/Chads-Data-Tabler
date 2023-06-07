@@ -25,7 +25,7 @@ const Topbar = ({colorMode,setColorMode}) => {
         </Typography>
       </Link>
 
-      <SearchSearchBar/>
+      {(process.env.REACT_APP_Search === 'true')? <SearchSearchBar/> : null}
 
       {/* Color Mode Toggle */}
       <Box display="flex">

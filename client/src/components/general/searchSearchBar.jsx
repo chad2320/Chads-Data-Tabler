@@ -56,9 +56,9 @@ const SearchSearchBar = () => {
     },[inputValue])
 
     return (
-      <Box>
+      <Box sx={{pl:0.5,pr:0.5}}>
         <Autocomplete
-          sx={{ width: 300 }}
+          sx={{ width:250,maxWidth: 300,minWidth:200 }}
           size='small'
           freeSolo
           disableClearable

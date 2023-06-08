@@ -33,15 +33,20 @@ const ListDisplay = () => {
         <TransitionGroup>
             {copiedElements.map((x, index) =>
                 <Slide 
-                direction='right'
-                key={x._id} timeout={300} mountOnEnter unmountOnExit appear>
+                    direction='right'
+                    key={x._id} 
+                    timeout={300} 
+                    mountOnEnter 
+                    unmountOnExit 
+                    appear
+                >
                     <div>
                     <LineItem
                         key={x._id}
                         tableData={x}
                         data={data}
                         controls={controls}
-                        searchValue={searchValue[0].key}
+                        searchValue={searchValue}
                     />
                     </div>
                 </Slide>

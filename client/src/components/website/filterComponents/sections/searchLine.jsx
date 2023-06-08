@@ -5,10 +5,6 @@ import { useSearch } from "../../../../utils/filterSearch";
 
 const SearchLine = () => {
     let {searchCountTotal,searchDatabase,loading} = useSearch()
-    
-    function handleClick(){
-        searchDatabase(true)
-    }
 
     return(
         <Box 
@@ -47,7 +43,7 @@ const SearchLine = () => {
                     size='small' 
                     variant='contained'
                     color='secondary'
-                    onClick={handleClick}
+                    onClick={()=>searchDatabase(true)}
                     >
                     Search
                 </Button>

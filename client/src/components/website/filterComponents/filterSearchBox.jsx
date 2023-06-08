@@ -1,10 +1,12 @@
 import {Box} from "@mui/material"
 import FilterSelect from "./sections/filterSelect";
 import FilterBoxesDisplay from "./sections/filterBoxesDisplay";
-import SearchLine from "./sections/searchLine";
+//import SearchLine from "./sections/searchLine";
 import React from 'react';
+//import { useSearch } from "../../../utils/filterSearch";
 
 const FilterSearchBox = () => {
+    //const {tableData} = useSearch()
 return (
         /* Box Component that houses everything and spaces it out. */
     <Box 
@@ -14,14 +16,11 @@ return (
             mr:0.5, 
             pr:1,
             pl:1,
-            border:1,
-            borderColor:'primary.main',
-            borderRadius:2
         }}
     >
         <FilterSelect />
         <FilterBoxesDisplay />
-        <SearchLine />
+        {/* {(tableData.length !== 0) ?<SearchLine /> : null} */}
     </Box>
     
     )

@@ -4,9 +4,7 @@ import LineItemData from "./lineItemDataDisplay";
 import React from 'react';
 import BasicModal from "../../../general/basicModal";
 
-const LineItem = (props) => {
-    const {tableData,data,searchValue} = props
-
+const LineItem = ({tableData,data,searchValue}) => {
     //Modal State & Handling
     const [modalOpen, setModalOpen] = React.useState(false);
     const handleModalOpen = () => setModalOpen(true);
@@ -53,9 +51,7 @@ const LineItem = (props) => {
                 alignItems='center'
                 >
                 <Typography variant='h5' noWrap>
-                    {
-                        tableData[searchValue]
-                    }
+                    {searchValue[0] ? tableData[searchValue[0].key] : null}
                 </Typography>
             </Box>
                 {/* Dynamic columns below */}

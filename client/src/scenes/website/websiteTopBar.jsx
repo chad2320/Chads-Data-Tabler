@@ -18,11 +18,13 @@ const Topbar = ({colorMode,setColorMode}) => {
       display="flex" 
       justifyContent="space-between" 
       alignItems='center'
+      backgroundColor='neutral.main'
     >
       {/* Name/Logo Location */}
       
       <Link to='/' >
         <Typography 
+          noWrap
           variant='h5'
           color='secondary'
         >

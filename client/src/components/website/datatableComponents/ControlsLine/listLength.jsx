@@ -33,19 +33,19 @@ const ListLength = () => {
                 <Button 
                 sx={{width:30}}
                     style={{maxWidth: 45, maxHeight: 25, minWidth: 45, minHeight: 25}} 
-                    variant={clicked === 10? 'contained':'outlined'} 
+                    variant='contained' 
                     onClick={()=>{handleClick(10)}} 
-                    color='primary'
+                    color={clicked === 10? 'secondary':'primary'}
                 >
                     10
                 </Button>
                 {(searchCountTotal > 10) ?
                     <Button 
                         style={{maxWidth: 45, maxHeight: 25, minWidth: 45, minHeight: 25}}  
-                        variant={clicked === 20? 'contained':'outlined'} 
+                        variant='contained' 
                         onClick={()=>{handleClick(20)}} 
                         sx={{ml:0.5, mr:0.5}}
-                        color='primary'
+                        color={clicked === 20? 'secondary':'primary'}
                     >
                         20
                     </Button>
@@ -55,9 +55,9 @@ const ListLength = () => {
                 
                 <Button 
                     style={{maxWidth: 45, maxHeight: 25, minWidth: 45, minHeight: 25}}
-                    variant={clicked === 30? 'contained':'outlined'} 
+                    variant='contained' 
                     onClick={()=>{handleClick(30)}} 
-                    color='primary'
+                    color={clicked === 30? 'secondary':'primary'}
                 >
                     30
                 </Button>

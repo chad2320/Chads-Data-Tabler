@@ -76,7 +76,8 @@ const SearchSearchBar = () => {
               <SearchIcon/>
               <TextField
                 {...params}
-                variant='standard'
+                variant='outlined'
+                label='Search'
                 size='small'
                 InputProps={{
                   ...params.InputProps

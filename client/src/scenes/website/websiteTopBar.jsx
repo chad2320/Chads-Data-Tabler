@@ -13,13 +13,18 @@ const Topbar = ({colorMode,setColorMode}) => {
   }
 
   return (
-    <Box sx={{pl:1,pr:1,pt:1}} display="flex" justifyContent="space-between" alignItems='center'>
+    <Box 
+      sx={{p:1}} 
+      display="flex" 
+      justifyContent="space-between" 
+      alignItems='center'
+    >
       {/* Name/Logo Location */}
       
       <Link to='/' >
         <Typography 
           variant='h5'
-          color='primary'
+          color='secondary'
         >
           {process.env.REACT_APP_APP_NAME}
         </Typography>

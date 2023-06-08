@@ -67,46 +67,66 @@ const ColumnHeader = ({ item }) => {
 
     return (
         <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ minWidth: itemWidth,maxWidth:itemWidth, minHeight: 20 }}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ 
+                minWidth: itemWidth,
+                maxWidth:itemWidth, 
+                minHeight: 20,
+            }}
         >
-        <IconButton onClick={handleToggle} size="small">
-            <ClearIcon color="primary.main" />
-        </IconButton>
-        
-        <Typography noWrap variant="h6">{title}</Typography>
-        
-        {isSort1 && sort1.val === -1 && (
-            <IconButton onClick={handleChange} size="small">
-            <SouthIcon color="primary.main" />
-            </IconButton>
-        )}
-        
-        {isSort1 && sort1.val === 1 && (
-            <IconButton onClick={handleChange} size="small">
-            <NorthIcon color="primary.main" />
-            </IconButton>
-        )}
-        
-        {(!isSort1 || sort1.val === 0) && !isSort2 && (
-            <IconButton onClick={handleChange} size="small">
-            <HeightIcon />
-            </IconButton>
-        )}
-        
-        {isSort2 && sort2.val === -1 && (
-            <IconButton onClick={handleChange} size="small">
-            <SouthIcon color="primary.main" />
-            </IconButton>
-        )}
-        
-        {isSort2 && sort2.val === 1 && (
-            <IconButton onClick={handleChange} size="small">
-            <NorthIcon color="primary.main" />
-            </IconButton>
-        )}
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                    backgroundColor:'secondary.main',
+                    borderRadius:5,
+                }}
+            >
+                <IconButton onClick={handleToggle} size="small">
+                    <ClearIcon color="primary.main" />
+                </IconButton>
+                
+                <Typography 
+                    noWrap 
+                    variant="h6"
+                    color='white'
+                    >
+                    {title}
+                </Typography>
+                
+                {isSort1 && sort1.val === -1 && (
+                    <IconButton onClick={handleChange} size="small">
+                    <SouthIcon color="primary.main" />
+                    </IconButton>
+                )}
+                
+                {isSort1 && sort1.val === 1 && (
+                    <IconButton onClick={handleChange} size="small">
+                    <NorthIcon color="primary.main" />
+                    </IconButton>
+                )}
+                
+                {(!isSort1 || sort1.val === 0) && !isSort2 && (
+                    <IconButton onClick={handleChange} size="small">
+                    <HeightIcon />
+                    </IconButton>
+                )}
+                
+                {isSort2 && sort2.val === -1 && (
+                    <IconButton onClick={handleChange} size="small">
+                    <SouthIcon color="primary.main" />
+                    </IconButton>
+                )}
+                
+                {isSort2 && sort2.val === 1 && (
+                    <IconButton onClick={handleChange} size="small">
+                    <NorthIcon color="primary.main" />
+                    </IconButton>
+                )}
+            </Box>
         </Box>
     );
     };

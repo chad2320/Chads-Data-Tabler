@@ -45,8 +45,8 @@ const SearchLine = () => {
                 
                 <Button /* Search button */
                     size='small' 
-                    variant='outlined'
-                    color='primary'
+                    variant='contained'
+                    color='secondary'
                     onClick={handleClick}
                     >
                     Search

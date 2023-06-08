@@ -52,12 +52,11 @@ const LineItemData = (props) => {
     } else if(typeof data === 'boolean'){
         if(data){
             return(
-                <CheckIcon sx={{minWidth:itemWidth,maxWidth:itemWidth}}></CheckIcon>
-
+                <CheckIcon color='secondary' sx={{minWidth:itemWidth,maxWidth:itemWidth}}></CheckIcon>
             )
         }else{
             return(
-                <CloseIcon sx={{minWidth:itemWidth,maxWidth:itemWidth}}></CloseIcon>
+                <CloseIcon color='secondary' sx={{minWidth:itemWidth,maxWidth:itemWidth}}></CloseIcon>
             )
         }
     } else if(data === null){

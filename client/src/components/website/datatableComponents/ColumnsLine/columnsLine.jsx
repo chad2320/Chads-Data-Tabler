@@ -33,10 +33,8 @@ const ColumnsLine = () => {
                 sx={{
                     minHeight:'10px', 
                     minWidth:'10px',
-                    p:0.5,
-                    border:1,
-                    borderColor:"primary.main",
-                    borderRadius:1
+                    pl:1,
+                    pb:0.25,
                 }}
                 display='flex' 
                 flexDirection='row'
@@ -60,6 +58,7 @@ const ColumnsLine = () => {
                             width:'100%'
                         }}
                         multiple
+                        disableClearable
                         id="tags-standard"
                         freeSolo
                         filterSelectedOptions
@@ -75,7 +74,8 @@ const ColumnsLine = () => {
                         <TextField
                             {...params}
                             sx={{mt:0,mb:0}}
-                            variant="standard"
+                            size='small'
+                            variant="outlined"
                             placeholder="Add More Columns Here"
                             margin="normal"
                             fullWidth

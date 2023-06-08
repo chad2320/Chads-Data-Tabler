@@ -38,7 +38,7 @@ const LineItem = (props) => {
                 minWidth:'10px',
                 p:0.5, 
                 mt:1,
-                border:1,
+                border:1.5,
                 borderColor:"primary.main",
                 borderRadius:1
             }}

@@ -15,9 +15,10 @@ const ListDisplay = () => {
         const copyElementsWithInterval = () => {
         if (index < tableData.length) {
             const element = tableData[index];
+            copiedElements[index] = element
             setCopiedElements(prevElements => [...prevElements, element]);
             index++;
-            setTimeout(copyElementsWithInterval, 300); // Wait for 1 second before copying the next element
+            setTimeout(copyElementsWithInterval, 300); // Wait for 300ms before copying the next element
         }
         };
         copyElementsWithInterval(); // Start copying elements
@@ -41,7 +42,7 @@ const ListDisplay = () => {
                         data={data}
                         controls={controls}
                         searchValue={searchValue[0].key}
-                        />
+                    />
                     </div>
                 </Slide>
             )}

@@ -1,16 +1,15 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography,Tooltip } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SearchSearchBar from "../../components/general/searchSearchBar";
 import {Link} from 'react-router-dom'
 import React from 'react';
-const Topbar = ({colorMode,setColorMode}) => {
-  //const colors = tokens(theme.palette.mode);
+import InfoIcon from '@mui/icons-material/Info';
+import {useGuideInformation} from '../../utils/userGuides'
 
-  function handleChange(){
-    let temp = colorMode
-    temp === 'dark' ? setColorMode('light') : setColorMode('dark')
-  }
+const Topbar = ({colorMode,setColorMode}) => {
+  const { guide, setGuide } = useGuideInformation();
+  console.log('topbar',guide)
 
   return (
     <Box 
@@ -36,7 +35,15 @@ const Topbar = ({colorMode,setColorMode}) => {
 
       {/* Color Mode Toggle */}
       <Box display="flex">
-        <IconButton onClick={handleChange}>
+        <Tooltip 
+          title={guide ? 'Disable Guides' : 'Enable Guides'}
+          placement='left'
+        >
+          <IconButton onClick={()=>setGuide(!guide)}>
+            <InfoIcon/>
+          </IconButton>
+        </Tooltip>
+        <IconButton onClick={()=>colorMode === 'dark' ? setColorMode('light') : setColorMode('dark')}>
           {colorMode === "dark" ? (
             <DarkModeOutlinedIcon />
           ) : (

@@ -6,6 +6,7 @@ import AppRouterContainer from './AppRouterContainer'
 import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/general/loading';
 import theThemer from './utils/themer';
+import { GuideProvider } from './utils/userGuides';
 
 function App() {
   let themer = theThemer()
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <ThemeProvider theme={themer.theme}>
+    <GuideProvider>
     <CssBaseline />
     <BrowserRouter>
         <Topbar 
@@ -28,6 +30,7 @@ function App() {
           setColorOptions={themer.setColorOptions}
           />
     </BrowserRouter>
+    </GuideProvider>
     </ThemeProvider>
 
   );

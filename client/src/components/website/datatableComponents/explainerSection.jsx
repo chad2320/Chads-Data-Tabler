@@ -45,7 +45,7 @@ const ExplainerSection = () => {
                     sx={{width:'48%'}}
                 >
 
-                    <Typography>Hello</Typography>
+                    {/* <Typography>Hello</Typography> */}
 
                 </Box>
             </Box>

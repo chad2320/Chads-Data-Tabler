@@ -1,11 +1,11 @@
 import React,{useState,useEffect,createContext,useContext} from 'react'
 import getTableData from '../CRUD Operations/getTableData';
-import useFetchFilters from './filterSearch/useFetchFilters';
+import {useFiltersContext} from './filterSearch/useFetchFilters';
 
 const SearchContext = createContext(null)
 
 export const SearchProvider = ({children}) => {
-  const {data,setData} = useFetchFilters()
+  const {data,setData} = useFiltersContext()
 /* ------------------------------------Search Functionality------------------- */
                             /* This data is built with
                             the main filterbox and used within

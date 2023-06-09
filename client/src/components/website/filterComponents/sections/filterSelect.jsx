@@ -50,7 +50,7 @@ const FilterSelect = () => {
                                     {...params}
                                     sx={{mt:0,mb:0}}
                                     variant="outlined"
-                                    placeholder="Add Your Filters Here"
+                                    placeholder="Add Filters Here To Refine Results"
                                     margin="normal"
                                 />
                             )}

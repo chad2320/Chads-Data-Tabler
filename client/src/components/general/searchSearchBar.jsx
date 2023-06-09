@@ -1,6 +1,6 @@
 import { Autocomplete, TextField,Box } from "@mui/material"
 import React,{useState,useEffect} from 'react';
-import useFetchFilters from '../../utils/filterSearch/useFetchFilters'
+import {useFiltersContext} from '../../utils/filterSearch/useFetchFilters'
 import BasicModal from "./basicModal";
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -8,7 +8,7 @@ const SearchSearchBar = () => {
     //Search State
     const [inputValue,setInputValue] = useState('')
     const [options,setOptions] = useState([])
-    const {searchValue} = useFetchFilters()
+    const {searchValue} = useFiltersContext()
 
     //Modal State & Handling
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -58,7 +58,7 @@ const SearchSearchBar = () => {
     return (
       <Box sx={{pl:0.5,pr:0.5}}>
         <Autocomplete
-          sx={{ width:250,maxWidth: 300,minWidth:200 }}
+          sx={{ width:200,maxWidth: 300,minWidth:200 }}
           size='small'
           freeSolo
           disableClearable
@@ -77,7 +77,7 @@ const SearchSearchBar = () => {
               <TextField
                 {...params}
                 variant='outlined'
-                label='Search'
+                label='Search By Title'
                 size='small'
                 InputProps={{
                   ...params.InputProps

@@ -5,11 +5,10 @@ import SearchSearchBar from "../../components/general/searchSearchBar";
 import {Link} from 'react-router-dom'
 import React from 'react';
 import InfoIcon from '@mui/icons-material/Info';
-import {useGuideInformation} from '../../utils/userGuides'
+import {useGuideInformation} from '../../utils/useGuides'
 
 const Topbar = ({colorMode,setColorMode}) => {
   const { guide, setGuide } = useGuideInformation();
-  console.log('topbar',guide)
 
   return (
     <Box 
@@ -36,10 +35,10 @@ const Topbar = ({colorMode,setColorMode}) => {
       {/* Color Mode Toggle */}
       <Box display="flex">
         <Tooltip 
-          title={guide ? 'Disable Guides' : 'Enable Guides'}
+          title={guide.enabled ? 'Disable Guides' : 'Enable Guides'}
           placement='left'
         >
-          <IconButton onClick={()=>setGuide(!guide)}>
+          <IconButton onClick={()=>setGuide('enabled',!guide.enabled)}>
             <InfoIcon/>
           </IconButton>
         </Tooltip>

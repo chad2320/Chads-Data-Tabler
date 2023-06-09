@@ -1,7 +1,7 @@
-import {useState,useEffect} from 'react'
+import React,{createContext,useContext,useState,useEffect} from 'react'
 import getFilters from '../../CRUD Operations/getFilters';
 
-const getSearchKeyValuePairs = (obj) => { //Used for setting search value
+const getSearchKeyValuePairs = (obj) => { //Helper used for setting search value
     const searchKeyValuePairs = [];
   
     const traverse = (obj, path = '') => {
@@ -18,33 +18,60 @@ const getSearchKeyValuePairs = (obj) => { //Used for setting search value
     return searchKeyValuePairs;
 };
 
-const useFetchFilters = () => { //Grabs information from db and provides it to app
-    //Filters from mongodb controls collection
-    const [data,setData] = useState(null)
-    const [searchValue,setSearchValue] = useState(null)
-    //Grab the filters from mongo if none are present
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-            const response = await getFilters();
-            if (response != null) {
-                setData(response.controlsObject);
-            }
-            } catch (error) {
-            console.error('Error fetching filters:', error);
-            }
-        };
-
-        if (data == null) {
-            fetchData();
-        }
-    }, []);
-
-    useEffect(()=>{
-        setSearchValue(getSearchKeyValuePairs(data))
-    },[data])
-
-    return {data,setData,searchValue}
+function checkVisibility(obj) {
+  if (typeof obj !== 'object' || obj === null) {
+    return false;
+  }
+  
+  for (let key in obj) {
+    if (key === 'visible' && obj[key] === true) {
+      return true;
+    } else if (typeof obj[key] === 'object') {
+      if (checkVisibility(obj[key])) {
+        return true;
+      }
+    }
+  }
+  
+  return false;
 }
 
-export default useFetchFilters
+const FiltersContext = createContext();
+
+export const useFiltersContext = () => {
+  return useContext(FiltersContext);
+};
+
+export const FiltersProvider = ({ children }) => {
+  const [data, setData] = useState(null);
+  const [hasVisibleFilters, setHasVisibleFilters] = useState(false);
+  const [searchValue, setSearchValue] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getFilters();
+        if (response != null) {
+          setData(response.controlsObject);
+        }
+      } catch (error) {
+        console.error('Error fetching filters:', error);
+      }
+    };
+
+    if (data == null) {
+      fetchData();
+    }
+  }, []);
+
+  useEffect(() => {
+    setSearchValue(getSearchKeyValuePairs(data));
+    setHasVisibleFilters(checkVisibility(data));
+  }, [data]);
+
+  return (
+    <FiltersContext.Provider value={{ data, setData, searchValue, hasVisibleFilters }}>
+      {children}
+    </FiltersContext.Provider>
+  );
+};

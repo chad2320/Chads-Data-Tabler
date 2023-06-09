@@ -4,31 +4,45 @@ import ColumnsLine from "./ColumnsLine/columnsLine";
 import ListDisplay from "./ListDisplay/listDisplay";
 import React from 'react';
 import {useSearch} from "../../../utils/filterSearch";
+import ExplainerSection from "../userGuides/explainerSection";
+import { useGuideInformation } from "../../../utils/useGuides";
 
 const CustomDataTable = () => {
     const {tableData} = useSearch()
-        
-    if(tableData){
-        return (
-            <Fade 
-                in 
-                timeout={250}
-            >
+    const {guide} = useGuideInformation()
+
+    return (
+        <Box>
+            {(tableData.length > 0) ?
+            <Fade in timeout={300}>
                 <Box 
-                    sx={{pl:1,pr:1}}
-                >
-                    <ControlsLine />
+                    sx={{mt:1,pl:0.5,pr:0.5}}
+                    >
+                    <ControlsLine /> 
                     <ColumnsLine />
                     <ListDisplay />
-                    
                 </Box>
             </Fade> 
-        )} else {
-            return (
-            <Box>
-            </Box>
-        )}
-    }
+            : 
+            (guide.enabled && guide.current === 'addFilter') ?
+                <ExplainerSection
+                    text='Try adding some filters to your search!'
+                    arrow={true}
+                    guideButton={true}
+                /> 
+            :
+            (guide.enabled && guide.current === 'useFilter') ?
+                <ExplainerSection
+                    text='Edit your filters parameters then hit search!'
+                    arrow={false}
+                    guideButton={false}
+                />
+            :
+            null
+            }
+        </Box>
+    )
+} 
 
 
 export default CustomDataTable

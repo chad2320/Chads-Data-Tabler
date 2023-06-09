@@ -1,11 +1,11 @@
 import React,{useState,useEffect,createContext,useContext} from 'react'
 import getTableData from '../CRUD Operations/getTableData';
-import useFetchFilters from './filterSearch/useFetchFilters';
+import {useFiltersContext} from './filterSearch/useFetchFilters';
 
 const SearchContext = createContext(null)
 
 export const SearchProvider = ({children}) => {
-  const {data,setData} = useFetchFilters()
+  const {data,setData} = useFiltersContext()
 /* ------------------------------------Search Functionality------------------- */
                             /* This data is built with
                             the main filterbox and used within
@@ -20,44 +20,44 @@ export const SearchProvider = ({children}) => {
     const [loading,setLoading] = useState(false)
 
   /* Function that runs the filters page search */
-      const searchDatabase = async (isSearch) => {
-        
-        //Sets page to 0 if we are running a new search
-          if(isSearch){
-            let temp = controls
-            temp.page = 0
-            setControls(temp)
-          }
+    const searchDatabase = async (isSearch) => {
+      
+      //Sets page to 0 if we are running a new search
+        if(isSearch){
+          let temp = controls
+          temp.page = 0
+          setControls(temp)
+        }
 
-        //Get formatted data
-        let search = grabData(data)
+      //Get formatted data
+      let search = grabData(data)
 
-        //Combine controls info with filters info. To be passed into fetch
-        const combinedSearch = combineFiltersWithControls(search,controls)
-        //console.log('Combined Search Looks Like',combinedSearch)
+      //Combine controls info with filters info. To be passed into fetch
+      const combinedSearch = combineFiltersWithControls(search,controls)
+      //console.log('Combined Search Looks Like',combinedSearch)
 
-        //Check if search is the same as previous search
-        let sameDataCheck = identicalRequestCheck(combinedSearch,previousSearch)
+      //Check if search is the same as previous search
+      let sameDataCheck = identicalRequestCheck(combinedSearch,previousSearch)
 
-        //Perform the search if conditions are correct
-        if(!sameDataCheck && (isSearch || haveWeSearchedYet)){
-          setLoading(true)
-          //Encode the combinedSearch object so we can pass objects to api.
-          const theSearch = `?searchParams=${encodeURIComponent(JSON.stringify(combinedSearch))}`
-          //console.log(`${process.env.REACT_APP_Data_Collection}`+theSearch)
-          const data = await getTableData(theSearch)
-          //console.log('Data received from db',data)
-          setHaveWeSearchedYet(true)
-          if(data.tableData[0].data.length > 0){
-            setTableData(data.tableData[0].data)
-            setSearchCountTotal(data.tableData[0].count[0].Total)
-            setPreviousSearch(combinedSearch)
-          }else{
-            setSearchCountTotal(-1)
-          }
-          setLoading(false)
-        } else {console.log('This request was the same as the last one.')}
-      } 
+      //Perform the search if conditions are correct
+      if(!sameDataCheck && (isSearch || haveWeSearchedYet)){
+        setLoading(true)
+        //Encode the combinedSearch object so we can pass objects to api.
+        const theSearch = `?searchParams=${encodeURIComponent(JSON.stringify(combinedSearch))}`
+        //console.log(`${process.env.REACT_APP_Data_Collection}`+theSearch)
+        const data = await getTableData(theSearch)
+        //console.log('Data received from db',data)
+        setHaveWeSearchedYet(true)
+        if(data.tableData[0].data.length > 0){
+          setTableData(data.tableData[0].data)
+          setSearchCountTotal(data.tableData[0].count[0].Total)
+          setPreviousSearch(combinedSearch)
+        }else{
+          setSearchCountTotal(-1)
+        }
+        setLoading(false)
+      } else {console.log('This request was the same as the last one.')}
+    } 
 
 /* --------------------------End of search functionality---------------------- */
 
@@ -124,13 +124,6 @@ export const SearchProvider = ({children}) => {
 export const useSearch = () => {
   return useContext(SearchContext)
 }
-
-
-
-
-
-
-
 
 /* Grabs and formats data from state to be used in search */
 const grabData = (x) => {

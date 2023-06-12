@@ -8,8 +8,11 @@ import Loading from './components/general/loading';
 import theThemer from './utils/themer';
 import { GuideProvider } from './utils/useGuides';
 import { FiltersProvider } from './utils/filterSearch/useFetchFilters';
+import { useSelector } from 'react-redux';
+import BasicModal from './components/general/basicModal';
 
 function App() {
+  let {isOpen} = useSelector((store)=>store.modal)
   let themer = theThemer()
 
   if(!themer.theme){
@@ -22,6 +25,7 @@ function App() {
     <GuideProvider>
     <CssBaseline />
     <BrowserRouter>
+        {isOpen && <BasicModal/>}
         <Topbar 
           colorMode={themer.colorMode} 
           setColorMode={themer.setColorMode} 

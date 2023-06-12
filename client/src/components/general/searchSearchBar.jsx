@@ -1,19 +1,18 @@
 import { Autocomplete, TextField,Box } from "@mui/material"
 import React,{useState,useEffect} from 'react';
 import {useFiltersContext} from '../../utils/filterSearch/useFetchFilters'
-import BasicModal from "./basicModal";
 import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch } from "react-redux";
+import { openModal } from "../../features/modal/modalSlice";
 
 const SearchSearchBar = () => {
+    const dispatch = useDispatch()
     //Search State
     const [inputValue,setInputValue] = useState('')
     const [options,setOptions] = useState([])
     const {searchValue} = useFiltersContext()
 
     //Modal State & Handling
-    const [modalOpen, setModalOpen] = React.useState(false);
-    const handleModalOpen = () => setModalOpen(true);
-    const handleModalClose = () => setModalOpen(false);
 
     function extractStringsFromArray(array) {
       const extractedStrings = [];
@@ -69,7 +68,7 @@ const SearchSearchBar = () => {
           onInputChange={(event, newValue) => {
             setInputValue(newValue);
           }}
-          onChange={handleModalOpen}
+          onChange={()=>{dispatch(openModal())}}
           noOptionsText="No Results"
           renderInput={(params) => (
             <Box display='flex' flexDirection='row' alignItems='center'> 
@@ -86,7 +85,6 @@ const SearchSearchBar = () => {
             </Box>
           )}
         />
-        <BasicModal modalOpen={modalOpen} handleModalClose={handleModalClose}/>
       </Box>
 
     )

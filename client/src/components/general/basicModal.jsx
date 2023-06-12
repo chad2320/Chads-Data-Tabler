@@ -3,13 +3,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
+import { useSelector,useDispatch } from 'react-redux';
+import { closeModal } from '../../features/modal/modalSlice';
 
 export default function BasicModal(props) {
+  const dispatch = useDispatch()
+  const {isOpen} = useSelector((store) => store.modal)
+
   return (
     <div>
       <Modal
-        open={props.modalOpen}
-        onClose={props.handleModalClose}
+        open={isOpen}
+        onClose={()=>{dispatch(closeModal())}}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -46,7 +51,7 @@ export default function BasicModal(props) {
               }}
               size='small'
               variant='contained'
-              onClick={()=>{props.handleModalClose()}}
+              onClick={()=>{dispatch(closeModal())}}
               >
               Close
             </Button>

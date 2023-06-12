@@ -2,13 +2,13 @@ import { Box, Typography} from "@mui/material"
 import Grid from "@mui/material/Grid";
 import LineItemData from "./lineItemDataDisplay";
 import React from 'react';
-import BasicModal from "../../../general/basicModal";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../../../features/modal/modalSlice";
 
 const LineItem = ({tableData,data,searchValue}) => {
+    const dispatch = useDispatch()
     //Modal State & Handling
-    const [modalOpen, setModalOpen] = React.useState(false);
-    const handleModalOpen = () => setModalOpen(true);
-    const handleModalClose = () => setModalOpen(false);
+
 
     function flattenObject(obj, prefix = '') {
         let flattenedObj = {};
@@ -27,9 +27,8 @@ const LineItem = ({tableData,data,searchValue}) => {
 
     return (
         <Box>
-        <BasicModal modalOpen={modalOpen} handleModalClose={handleModalClose}/>
         <Box /* Box creating room for permanent columns */
-            onClick={()=>{handleModalOpen()}}
+            onClick={()=>{dispatch(openModal())}}
             sx={{
                 "&:hover": {'backgroundColor': 'secondary.main'}, 
                 minHeight:'10px', 

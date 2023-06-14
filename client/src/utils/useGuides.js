@@ -1,11 +1,11 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-import {useFiltersContext} from "./filterSearch/useFetchFilters";
+import { useSelector } from "react-redux";
 
 
 const GuideContext = createContext();
 
 export const GuideProvider = ({ children }) => {
-    let {hasVisibleFilters} = useFiltersContext()
+    let {visibleFilters} = useSelector((state) => state.filters)
     const [guide, _setGuide] = useState(
         {
         enabled: getGuideFromLocalStorage(),
@@ -25,12 +25,12 @@ export const GuideProvider = ({ children }) => {
         if(guide.enabled !== getGuideFromLocalStorage()){//Handle Storage
             localStorage.setItem("guide", JSON.stringify(guide.enabled))
         };
-        if(hasVisibleFilters && guide.current !== 'useFilter'){
+        if(visibleFilters && guide.current !== 'useFilter'){
             setGuide('current','useFilter')
-        } else if(!hasVisibleFilters && guide.current !== 'addFilter'){
+        } else if(!visibleFilters && guide.current !== 'addFilter'){
             setGuide('current','addFilter')
         }
-    }, [guide,hasVisibleFilters]);
+    }, [guide,visibleFilters]);
 
     function getGuideFromLocalStorage() {
         let tempGuide = localStorage.getItem("guide");

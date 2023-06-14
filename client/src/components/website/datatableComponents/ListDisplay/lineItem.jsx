@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 import { openModal } from "../../../../features/modal/modalSlice";
 
-const LineItem = ({tableData,data,searchValue}) => {
+const LineItem = ({tableData,data,searchKey}) => {
     const dispatch = useDispatch()
     //Modal State & Handling
 
@@ -50,7 +50,7 @@ const LineItem = ({tableData,data,searchValue}) => {
                 alignItems='center'
                 >
                 <Typography variant='h5' noWrap>
-                    {searchValue[0] ? tableData[searchValue[0].key] : null}
+                    {tableData[searchKey]}
                 </Typography>
             </Box>
                 {/* Dynamic columns below */}

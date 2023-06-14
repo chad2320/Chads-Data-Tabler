@@ -3,17 +3,16 @@ import {useSearch} from '../filterSearch'
 
 /* This section controls the display of filters in the default box. */
 
+
 const useSelectFilters = () => {
     const {data,setData} = useSearch()
     //State used in the autocomplete for filters box.
     const [filtersAutocomplete, setFiltersAutocomplete] = useState([]);
     const [filtersList,setfiltersList] = useState(null)
-
     //Build Option List From Data
     useEffect(()=>{
         if(data){
-            let temp = Object.keys(data)
-            .filter((item)=> 
+            let temp = Object.keys(data).filter((item)=> 
                 data[item].type === 'range' ||
                 data[item].type === 'boolean' || 
                 data[item].type === 'dropdown'

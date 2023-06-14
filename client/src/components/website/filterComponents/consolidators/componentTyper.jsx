@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useSearch } from "../../../../utils/filterSearch";
 import BooleanCheckmark from "../filters/boolean"
 import DefaultDropdown from "../filters/dropdown"
@@ -6,12 +7,13 @@ import { Grid } from "@mui/material";
 import React from 'react';
 
 const ComponentTyper = (props) => {
-  let { type, data } = props;
+  let { type } = props;
+  let {filtersData} = useSelector((store)=>store.filters)
   const {modifyData} = useSearch()
   const renderedComponents = [];
-  for (let key in data) {
-    if (data.hasOwnProperty(key)) {
-      const element = data[key];
+  for (let key in filtersData) {
+    if (filtersData.hasOwnProperty(key)) {
+      const element = filtersData[key];
       if (element.visible === true) {
         if (type === 'dropdown' && element.type === 'dropdown') {
           renderedComponents.push(

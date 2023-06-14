@@ -2,16 +2,14 @@ import { Box, Divider, Typography,Grid} from "@mui/material"
 import ComponentTyper from "../consolidators/componentTyper";
 import React, {useState,useEffect} from 'react';
 import {windowSizer} from '../../../../utils/windowSize'
-import useSelectFilters from "../../../../utils/filterSearch/useSelectFilters";
-import { useSearch } from "../../../../utils/filterSearch";
+import { useSelector } from "react-redux";
 
 //When users make a selection in filterSelect the corresponding filter is
 //added. This component displays the added filters and allows users to adjust
 //the filters.
 
 const FilterBoxesDisplay = () => {
-    const {filtersList} = useSelectFilters()
-    const {data,setData} = useSearch()
+    const {filtersData,filtersList} = useSelector((store) => store.filters)
     //Handle window sizing. 17-22
     let {windowSize} = windowSizer()
     let {width} = windowSize
@@ -25,39 +23,46 @@ const FilterBoxesDisplay = () => {
     const [haveBoolean,setHaveBoolean] = useState(false)
     const [haveRange,setHaveRange] = useState(false)
     const [haveDropdown,setHaveDropdown] = useState(false)
+    console.log(haveBoolean,haveDropdown,haveRange)
     
     function toggleCheck(x){
-        let temp = filtersList.filter(visibleTrue)
-        function visibleTrue (el){
-            return el.visible === true && el.type === x
+        if(filtersData.controlsObject){
+            function checkNestedObject(obj, targetType) {
+                if (typeof obj === 'object' && obj !== null) {
+                  for (const key in obj) {
+                    if (typeof obj[key] === 'object') {
+                      if (checkNestedObject(obj[key], targetType)) {
+                        return true;
+                      }
+                    } else if (obj[key] === true && obj['type'] === targetType) {
+                      return true;
+                    }
+                  }
+                }
+                return false;
+              }
+              return checkNestedObject(filtersData.controlsObject,x)
         }
-        return temp
-        
     }
     
     useEffect(()=>{
-        if(filtersList){
-            if(toggleCheck('boolean').length > 0){setHaveBoolean(true)}else{setHaveBoolean(false)}
-            if(toggleCheck('range').length > 0){setHaveRange(true)}else{setHaveRange(false)}
-            if(toggleCheck('dropdown').length > 0){setHaveDropdown(true)}else{setHaveDropdown(false)}
+        if(filtersList.length > 0){
+            if(toggleCheck('boolean')){setHaveBoolean(true)}else{setHaveBoolean(false)}
+            if(toggleCheck('range')){setHaveRange(true)}else{setHaveRange(false)}
+            if(toggleCheck('dropdown')){setHaveDropdown(true)}else{setHaveDropdown(false)}
         }
-    },[data])
+    },[filtersList])
 
 
 
     return (
     <Box 
-        sx={{
-            width:'100%'
-        }} 
+        sx={{width:'100%'}} 
         display='flex' 
         justifyContent='space-between'
         flexDirection={wideWindow ? 'row' : 'column'}//Adjusts layout
     >
         <Box
-            sx={{
-                
-            }}
             display='flex'
             flexDirection='column'
         >
@@ -72,8 +77,7 @@ const FilterBoxesDisplay = () => {
                     <Grid container>
                         <ComponentTyper 
                             type='range' 
-                            data={data} 
-                            setData={setData}
+                            data={filtersData} 
                         />
                     </Grid>
                 </Box>
@@ -94,8 +98,7 @@ const FilterBoxesDisplay = () => {
                     <Grid container>
                         <ComponentTyper 
                             type='dropdown' 
-                            data={data} 
-                            setData={setData}
+                            data={filtersData} 
                         />
                     </Grid>
                 </Box>
@@ -129,8 +132,7 @@ const FilterBoxesDisplay = () => {
                 </Typography>
                 <ComponentTyper 
                     type='boolean' 
-                    data={data} 
-                    setData={setData}
+                    data={filtersData} 
                 />
             </Box>
             

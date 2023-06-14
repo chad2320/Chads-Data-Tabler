@@ -7,8 +7,9 @@ import { clearStringSearch, getAutoCompleteItems, manageInputData } from "../../
 
 const SearchSearchBar = () => {
   const dispatch = useDispatch();
-  const { inputData, searchKey, data, status, error } = useSelector((store) => store.stringSearch);
-
+  const { inputData, searchData, status, error } = useSelector((store) => store.stringSearch);
+  const { searchKey } = useSelector((store) => store.filters);
+  
   return (
     <Box sx={{ pl: 0.5, pr: 0.5 }}>
       <Autocomplete
@@ -25,7 +26,7 @@ const SearchSearchBar = () => {
         disableClearable
         id="search bar"
         filterOptions={(x) => x}
-        options={data}
+        options={searchData}
         getOptionLabel={(option) => option[searchKey]}
         getOptionDisabled={(option) => !!option.disabled}
         inputValue={inputData}
@@ -45,7 +46,7 @@ const SearchSearchBar = () => {
             <TextField
               {...params}
               variant='outlined'
-              label={error ? 'Connection Error' : 'Search By Title'}
+              label={error ? 'Error' : 'Search By Title'}
               size='small'
               error={!!error}
               InputProps={{

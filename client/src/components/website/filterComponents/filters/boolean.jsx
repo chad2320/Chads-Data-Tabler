@@ -12,7 +12,6 @@ const BooleanCheckmark = (props) => {
         if(event.target.value === 'false'){result = false}
         modifyData(dbName,'data',result);
     }
-    
 
     return (
         <Box 

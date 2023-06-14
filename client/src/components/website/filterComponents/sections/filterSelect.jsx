@@ -2,17 +2,24 @@ import { Autocomplete,Chip,TextField, Box,Typography,CircularProgress,Button,Fad
 import React from 'react';
 import useSelectFilters from "../../../../utils/filterSearch/useSelectFilters";
 import { useSearch } from "../../../../utils/filterSearch";
-//https://codesandbox.io/s/autocomplete-with-chips-85rqq?file=/demo.js
+import { useDispatch } from "react-redux";
+import { modifySingleFilter, updateVisibility, addFilter2, removeFilter } from "../../../../features/filters/filtersSlice";
+import { useSelector } from "react-redux";
+
 
 const FilterSelect = () => {
-    const {filtersList,addFilter,filtersAutocomplete,
+    const dispatch = useDispatch()
+    const {filtersList,autoCompleteValue} = useSelector((store)=>store.filters)
+    const {addFilter,filtersAutocomplete,
     setFiltersAutocomplete} = useSelectFilters()
     let {searchCountTotal,searchDatabase,loading} = useSearch()
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+    //console.log(filtersAutocomplete)
 
-    if(filtersList){
+
+    if(filtersList.length > 0){
         return (
             <Box 
                 sx={{
@@ -36,15 +43,20 @@ const FilterSelect = () => {
                             freeSolo
                             size='small'
                             filterSelectedOptions
-                            options={filtersList
-                                .sort((a, b) =>b.type.toString()
-                                .localeCompare(a.type.toString()))
-                            }
-                            onChange={(e, newValue) => addFilter(newValue)}
+                            options={filtersList}
+                            onChange={(event, newValue) => {
+                                dispatch(modifySingleFilter({
+                                    id:newValue[0].path,
+                                    key:'visible',
+                                    value:true,
+                                }))
+                                dispatch(updateVisibility())
+                                dispatch(addFilter2(newValue))
+                            }}
                             groupBy={(option)=> capitalizeFirstLetter(option.type)}
                             getOptionLabel={option => option.title}
                             renderTags={() => {}}
-                            value={filtersAutocomplete}
+                            value={autoCompleteValue}
                             renderInput={params => (
                                 <TextField
                                     {...params}
@@ -85,7 +97,7 @@ const FilterSelect = () => {
                                 variant='contained'
                                 color='secondary'
                                 onClick={()=>searchDatabase(true)}
-                                >
+                            >
                                 Search
                             </Button>
                         </Box>
@@ -93,9 +105,9 @@ const FilterSelect = () => {
                     </Box>
                         {/* List Chips Here */}
                     <Box sx={{mt:0.5}}>
-                        {filtersAutocomplete.map((option) => {
+                        {autoCompleteValue.map((option) => {
                             // This is to handle new options added by the user (allowed by freeSolo prop).
-                            const label = option.title || option;
+                            const label = option.title;
                             return (
                             <Chip
                                 color='secondary'
@@ -105,7 +117,14 @@ const FilterSelect = () => {
                                 key={label}
                                 label={label}
                                 onDelete={() => {
-                                    setFiltersAutocomplete(filtersAutocomplete.filter(entry => entry !== option));
+                                    //setFiltersAutocomplete(filtersAutocomplete.filter(entry => entry !== option));
+                                    dispatch(modifySingleFilter({
+                                        id:option.path,
+                                        key:'visible',
+                                        value:false,
+                                    }))
+                                    dispatch(updateVisibility())
+                                    dispatch(removeFilter(option.path))
                                 }}
                             />
                         )})}

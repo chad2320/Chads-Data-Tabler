@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './scenes/website/websiteTopBar';
 import AppRouterContainer from './AppRouterContainer'
@@ -8,13 +8,19 @@ import Loading from './components/general/loading';
 import theThemer from './utils/themer';
 import { GuideProvider } from './utils/useGuides';
 import { FiltersProvider } from './utils/filterSearch/useFetchFilters';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
 import BasicModal from './components/general/basicModal';
+import { getFilters } from './features/filters/filtersSlice';
 
 function App() {
   let {isOpen} = useSelector((store)=>store.modal)
   let themer = theThemer()
-
+  const dispatch = useDispatch()
+  
+  useEffect(()=>{
+    dispatch(getFilters())
+  },[])
+  
   if(!themer.theme){
     return (<Loading/>)
   }

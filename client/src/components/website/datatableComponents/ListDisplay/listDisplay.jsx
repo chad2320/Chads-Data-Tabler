@@ -3,12 +3,12 @@ import LineItem from "./lineItem";
 import React, { useState, useEffect } from 'react';
 import { useSearch } from "../../../../utils/filterSearch";
 import { TransitionGroup } from 'react-transition-group';
-import {useFiltersContext} from "../../../../utils/filterSearch/useFetchFilters";
+import { useSelector } from "react-redux";
 
 const ListDisplay = () => {
     const { tableData, controls, data } = useSearch();
     const [copiedElements, setCopiedElements] = useState([]);
-    const {searchValue} = useFiltersContext()
+    const {searchKey} = useSelector((store) => store.filters)
 
     useEffect(() => { //Update the rendered array with a delay for each element
         let index = 0;
@@ -46,7 +46,7 @@ const ListDisplay = () => {
                         tableData={x}
                         data={data}
                         controls={controls}
-                        searchValue={searchValue}
+                        searchKey={searchKey}
                     />
                     </div>
                 </Slide>

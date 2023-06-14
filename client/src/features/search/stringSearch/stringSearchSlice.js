@@ -3,8 +3,7 @@ import axios from 'axios'
 
 const initialState = {
     inputData:'',
-    searchKey:'title',
-    data:[],
+    searchData:[],
     status:'idle',
     error:null,
 }
@@ -12,16 +11,20 @@ const initialState = {
 const url = `${process.env.REACT_APP_Express_Connection}search`
 
 export const getAutoCompleteItems = createAsyncThunk('stringSearch/autoComplete', 
-async (_,thunkAPI) => {
-    let x = thunkAPI.getState().stringSearch.inputData
-    let y = thunkAPI.getState().stringSearch.searchKey
-    try {
-        let response = await axios(`${url}?inputValue=${x}&key=${y}`)
-        return response.data
-    } catch (error) {
-        return thunkAPI.rejectWithValue('Something went wrong.')
+    async (_,thunkAPI) => {
+        let x = thunkAPI.getState().stringSearch.inputData
+        let y = thunkAPI.getState().filters.searchKey
+        try {
+            let response = await axios(`${url}?inputValue=${x}&key=${y}`)
+            if(response.data.length === 0){ //No Results Found
+                return [{[y]:'No Results',disabled:true}]
+            }
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue('Something went wrong.')
+        }
     }
-})
+)
 
 const stringSearchSlice = createSlice({
     name:'stringSearch',
@@ -31,7 +34,7 @@ const stringSearchSlice = createSlice({
             state.inputData = action.payload
         },
         clearStringSearch:(state) => {
-            state.data = []
+            state.searchData = []
         },
         setSearchkey:(state,action) => {
             state.searchKey = action.payload
@@ -41,17 +44,11 @@ const stringSearchSlice = createSlice({
         builder
             .addCase(getAutoCompleteItems.pending,(state)=>{
                 state.status = 'loading'
-                state.data = []
+                state.searchData = []
             })
             .addCase(getAutoCompleteItems.fulfilled,(state,action)=>{
                 state.status = 'succeeded'
-                if(action.payload.length === 0){
-                    state.data = [{
-                        [state.searchKey]:'No Results',
-                        disabled:true
-                    }]
-                } else {state.data = action.payload}
-                
+                state.searchData = action.payload
             })
             .addCase(getAutoCompleteItems.rejected,(state,action) => {
                 state.status = 'failed'

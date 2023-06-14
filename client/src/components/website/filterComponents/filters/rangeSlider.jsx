@@ -2,14 +2,14 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Typography,Tooltip } from '@mui/material';
 import React from 'react';
+import { useSelector , useDispatch } from 'react-redux';
+import { modifySingleFilter } from '../../../../features/filters/filtersSlice';
 
-const RangeSlider = (props) => {
-    let {dbName,title,limits,data,step,modifyData} = props
+const RangeSlider = ({path}) => {
+    const dispatch = useDispatch()
     
-    const handleChange = (event, newValue) => {
-        modifyData(dbName,'data',newValue);
-        //console.log(newValue)
-    }
+    //Import the relevent data under the alias data through destructuring
+    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filters)
 
     return(
     <Box 
@@ -29,26 +29,31 @@ const RangeSlider = (props) => {
         justifyContent="space-between" 
         alignItems='center'
       >
-        <Tooltip title={title}>
+        <Tooltip title={data.title}>
           <Typography 
             noWrap={true}
             variant="h6" 
             color='text'
             >
-            {title}
+            {data.title}
           </Typography>
         </Tooltip>
         
       </Box>
       <Slider
         getAriaLabel={() => 'Age Range'}
-        min= {limits[0]}
-        max={limits[1]}
-        value={data}
-        onChange={handleChange}
+        min= {data.limits[0]}
+        max={data.limits[1]}
+        value={data.data}
+        onChange={(event,newValue)=>
+          dispatch(modifySingleFilter({
+            id:data.path,
+            key:'data',
+            value:newValue,
+        }))}
         valueLabelDisplay="auto"
         color='primary'
-        step={step}
+        step={data.step}
       />
     </Box>
     )

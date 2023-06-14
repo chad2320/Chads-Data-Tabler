@@ -2,15 +2,24 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import NativeSelect from '@mui/material/NativeSelect';
 import React from 'react';
+import { useSelector , useDispatch } from 'react-redux';
+import { modifySingleFilter } from '../../../../features/filters/filtersSlice';
 
-const BooleanCheckmark = (props) => {
-    let {title,data,dbName,modifyData} = props
+
+const BooleanCheckmark = ({path}) => {
+    const dispatch = useDispatch()
+    //Import the relevent data under the alias data through destructuring
+    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filters)
 
     const handleChange = (event) => {
         let result;
         if(event.target.value === 'true'){result = true}
         if(event.target.value === 'false'){result = false}
-        modifyData(dbName,'data',result);
+        dispatch(modifySingleFilter({
+            id: path,
+            key:'data',
+            value:result,
+        }));
     }
 
     return (
@@ -36,13 +45,13 @@ const BooleanCheckmark = (props) => {
                 variant="h6" 
                 color='text.main'
             >
-                {title}
+                {data.title}
             </Typography>
             <Box>
                 <NativeSelect
-                    defaultValue={data}
+                    defaultValue={data.data}
                     onChange={handleChange}
-                    inputProps={{name: title, id: 'uncontrolled-native',}}
+                    inputProps={{name: data.title, id: 'uncontrolled-native',}}
                 >  
                     <option value={null}>No Preference</option>
                     <option value={true}>Required</option>

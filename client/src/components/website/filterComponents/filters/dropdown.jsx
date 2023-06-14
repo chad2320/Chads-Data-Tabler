@@ -3,34 +3,24 @@ import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import { Typography } from '@mui/material';
 import React from 'react';
-const DefaultDropdown = (props) => {
-    const {data,title,options,dbName,modifyData} = props
+import { useSelector , useDispatch } from 'react-redux';
+import { modifySingleFilter } from '../../../../features/filters/filtersSlice';
 
-    function removeDuplicates(array) {
-      const seen = [];
-      let result = [];
-    
-      for (let item of array) {
-        if (item !== null && seen.includes(item)) {
-          continue;
-        }
-        seen.push(item);
-        result.push(item);
-      }
-      result = array.filter(item => item !== null);//Remove all nulls
-      result.sort()
-      result.unshift(null);//Add one null
-      return result;
-    }
-  
-    let cleanOptions = removeDuplicates(options)
+const DefaultDropdown = ({path}) => {
+    const dispatch = useDispatch()
 
-    const handleChange = (event) => {
+    //Import the relevent data under the alias data through destructuring
+    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filters)
+
+    const handleChange = (event) => { //If user selects Any set to null
       let result = event.target.value
       if(event.target.value === 'Any'){result = null}
-      modifyData(dbName,'data',result);      
+      dispatch(modifySingleFilter({
+        id:data.path,
+        key:'data',
+        value:result,
+      }));      
     }
-
 
     return (
         <Box 
@@ -52,24 +42,23 @@ const DefaultDropdown = (props) => {
                 variant="h6" 
                 color='text'
               >
-                {title}
+                {data.title}
               </Typography>
               
             </Box>
             <NativeSelect
-              defaultValue={data ? data : 'Any'}
+              defaultValue={data.data ? data.data : 'Any'}
               onChange={handleChange}
-              inputProps={{name: 'age', id: 'uncontrolled-native',}}
-            >  
-              {cleanOptions.map(item=>{
-                return (
-                  <option 
-                    key={item === null ? 'Any': item} 
-                    value={item}
-                  >
-                      {item === null ? 'Any': item}
-                  </option>
-                )})}
+              inputProps={{ name: data.title, id: 'uncontrolled-native' }}
+            >
+              {[...new Set(data.options)].sort().map((item) => (
+                <option
+                  key={item === null ? 'Any' : item}
+                  value={item}
+                >
+                  {item === null ? 'Any' : item}
+                </option>
+              ))}
             </NativeSelect>
           </FormControl>
         </Box>

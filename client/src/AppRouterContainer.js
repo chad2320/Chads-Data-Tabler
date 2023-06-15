@@ -12,7 +12,7 @@ const FiltersPage = lazy(() => import('./pages/admin/filtersPage'));
 const GeneralSettings = lazy(() => import('./pages/admin/generalSettings'));
 const ThemeForm = lazy(() => import('./pages/admin/themeForm'));
 
-const AppRouterContainer = ({colorOptions,setColorOptions}) => {
+const AppRouterContainer = () => {
 
     return(
         <AuthProvider>
@@ -48,10 +48,7 @@ const AppRouterContainer = ({colorOptions,setColorOptions}) => {
             <Route path="/admin/theme" element={
                 <RequireAuth>
                     <Suspense fallback={<Loading/>}>
-                        <ThemeForm
-                            colorOptions={colorOptions}
-                            setColorOptions={setColorOptions}
-                            />
+                        <ThemeForm />
                     </Suspense>
                 </RequireAuth>
             }/>

@@ -6,8 +6,12 @@ import {Link} from 'react-router-dom'
 import React from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import {useGuideInformation} from '../../utils/useGuides'
+import { useSelector , useDispatch } from "react-redux";
+import { reverseColorMode } from "../../features/theme/themeSlice";
 
-const Topbar = ({colorMode,setColorMode}) => {
+const Topbar = () => {
+  const dispatch = useDispatch()
+  const { colorMode } = useSelector((store)=>store.theme)
   const { guide, setGuide } = useGuideInformation();
 
   return (
@@ -42,11 +46,11 @@ const Topbar = ({colorMode,setColorMode}) => {
             <InfoIcon/>
           </IconButton>
         </Tooltip>
-        <IconButton onClick={()=>colorMode === 'dark' ? setColorMode('light') : setColorMode('dark')}>
+        <IconButton aria-label='colorModeToggle' onClick={()=>{dispatch(reverseColorMode())}}>
           {colorMode === "dark" ? (
-            <DarkModeOutlinedIcon />
+            <DarkModeOutlinedIcon aria-label='darkmode'/>
           ) : (
-            <LightModeOutlinedIcon />
+            <LightModeOutlinedIcon aria-label='lightmode'/>
           )}
         </IconButton>
       </Box>

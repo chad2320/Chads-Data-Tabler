@@ -35,8 +35,6 @@ const ListDisplay = () => {
                     direction='right'
                     key={x._id} 
                     timeout={300} 
-                    mountOnEnter 
-                    unmountOnExit 
                     appear
                 >
                     <div>

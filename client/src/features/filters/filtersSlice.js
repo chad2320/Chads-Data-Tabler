@@ -3,6 +3,7 @@ import { getSearchKeyValuePairs } from "./helpers/getSearchKeyValuePairs";
 import { checkVisibility } from './helpers/checkVisibility'
 import axios from 'axios'
 import { buildFiltersList } from "./helpers/buildFiltersList";
+import { setPalette , setColorOptions } from "../theme/themeSlice";
 
 const initialState = {
     filtersData: [],
@@ -21,6 +22,8 @@ export const getFilters = createAsyncThunk('fitlers/getFilters',
     async (_,thunkAPI) => {
         try {
             const response = await axios(url)
+            thunkAPI.dispatch(setPalette(response.data.theme))
+            thunkAPI.dispatch(setColorOptions(response.data.theme))
             return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue('Error getting filters.')

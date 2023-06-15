@@ -18,16 +18,15 @@ const FilterSearch = () => {
                       displaying anything. Which it controls
                       itself.*/
 
-    if(!filtersData){return <Loading/>}
-    else{
-      return(
-          <Box sx={{pb:3}}>
-                {/* This renders everything in the filter box */}
-              <FilterSearchBox />
-                {/* This renders the data table */}
-              <CustomDataTable />
-          </Box>
-      )}
+    if(filtersData.length === 0){return <Loading/>}
+    return(
+        <Box sx={{pb:3}}>
+              {/* This renders everything in the filter box */}
+            <FilterSearchBox />
+              {/* This renders the data table */}
+            <CustomDataTable />
+        </Box>
+    )
 }
 
 export default FilterSearch

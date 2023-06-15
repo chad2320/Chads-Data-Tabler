@@ -8,7 +8,7 @@ import { flattenObject } from "../../../../helpers";
 
 const LineItem = ({tableData,searchKey}) => {
     const dispatch = useDispatch()
-    const { columns } = useSelector((store)=>store.filters)
+    const { columns } = useSelector((store)=>store.filterSearch)
 
     return (
         <Box>

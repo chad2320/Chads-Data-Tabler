@@ -7,13 +7,12 @@ import ExplainerSection from "../userGuides/explainerSection";
 import { useSelector } from "react-redux";
 
 const CustomDataTable = () => {
-    const {status} = useSelector((store) => store.filterSearch)
-    const {visibleFilters} = useSelector((store) => store.filters)
+    const {tableData,visibleFilters} = useSelector((store) => store.filterSearch)
     const {enabled} = useSelector((store) => store.userGuide)
 
     return (
         <Box>
-            {(status !== 'idle') ?
+            {(tableData.length > 0) ?
             <Fade in timeout={300}>
                 <Box sx={{mt:1,pl:0.5,pr:0.5}}>
                     <ControlsLine /> 

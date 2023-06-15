@@ -8,7 +8,7 @@ import { clearStringSearch, getAutoCompleteItems, manageInputData } from "../../
 const SearchSearchBar = () => {
   const dispatch = useDispatch();
   const { inputData, searchData, status, error } = useSelector((store) => store.stringSearch);
-  const { searchKey } = useSelector((store) => store.filters);
+  const { searchKey } = useSelector((store) => store.filterSearch);
   
   return (
     <Box sx={{ pl: 0.5, pr: 0.5 }}>

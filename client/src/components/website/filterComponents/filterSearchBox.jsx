@@ -1,12 +1,9 @@
 import {Box} from "@mui/material"
 import FilterSelect from "./sections/filterSelect";
 import FilterBoxesDisplay from "./sections/filterBoxesDisplay";
-//import SearchLine from "./sections/searchLine";
 import React from 'react';
-//import { useSearch } from "../../../utils/filterSearch";
 
 const FilterSearchBox = () => {
-    //const {tableData} = useSearch()
 return (
         /* Box Component that houses everything and spaces it out. */
     <Box 

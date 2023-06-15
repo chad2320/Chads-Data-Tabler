@@ -13,7 +13,7 @@ const url = `${process.env.REACT_APP_Express_Connection}search`
 export const getAutoCompleteItems = createAsyncThunk('stringSearch/autoComplete', 
     async (_,thunkAPI) => {
         let x = thunkAPI.getState().stringSearch.inputData
-        let y = thunkAPI.getState().filters.searchKey
+        let y = thunkAPI.getState().filterSearch.searchKey
         try {
             let response = await axios(`${url}?inputValue=${x}&key=${y}`)
             if(response.data.length === 0){ //No Results Found

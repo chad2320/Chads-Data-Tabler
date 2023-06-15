@@ -1,14 +1,13 @@
 import { Autocomplete,Chip,TextField, Box,Typography,CircularProgress,Button,Fade} from "@mui/material"
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { modifySingleFilter, updateVisibility, addFilter2, removeFilter } from "../../../../features/filters/filtersSlice";
 import { useSelector } from "react-redux";
-import { getTableData } from "../../../../features/search/filterSearch/filterSearchSlice";
+import { getTableData , modifySingleFilter, updateVisibility, addFilter2, removeFilter} from "../../../../features/search/filterSearch/filterSearchSlice";
 
 const FilterSelect = () => {
     const dispatch = useDispatch()
-    const {filtersList,autoCompleteValue} = useSelector((store)=>store.filters)
-    const { searchCountTotal , status} = useSelector((store)=>store.filterSearch)
+    const {searchCountTotal,status,filtersList,autoCompleteValue,tableData,
+    } = useSelector((store)=>store.filterSearch)
     
     if(filtersList.length > 0){
         return (
@@ -64,17 +63,17 @@ const FilterSelect = () => {
                             alignItems='center'
                         >
                             {status === 'loading' && <CircularProgress size={20}/>}
-                            {status === 'succeeded' &&
+                            {(tableData.length > 0 || status === 'No Results') &&
                                 <Fade in timeout={1000}>
                                     <Typography /* Shows total results found in search */
                                         variant='h5'
                                         noWrap
                                         sx={{ml:1,mr:1}}
                                     >
-                                        {searchCountTotal === 0  ? null : 
-                                            (searchCountTotal === -1 ? 
-                                                'No Results' : 
-                                                `${searchCountTotal} results`) }
+                                        {(status === 'No Results' && tableData.length === 0)  ? 
+                                            'No Results' 
+                                        : 
+                                            `${searchCountTotal} results` }
                                     </Typography>    
                                 </Fade>
                             }
@@ -114,6 +113,11 @@ const FilterSelect = () => {
                                         key:'visible',
                                         value:false,
                                     }))
+                                    /* dispatch(modifySingleFilter({
+                                        id:option.path,
+                                        key:'data',
+                                        value:null,
+                                    })) */
                                     dispatch(updateVisibility())
                                     dispatch(removeFilter(option.path))
                                 }}

@@ -5,8 +5,7 @@ import { TransitionGroup } from 'react-transition-group';
 import { useSelector } from "react-redux";
 
 const ListDisplay = () => {
-    const { tableData } = useSelector((store) => store.filterSearch);
-    const { searchKey } = useSelector((store) => store.filters)
+    const {tableData,searchKey} = useSelector((store) => store.filterSearch);
     const [copiedElements, setCopiedElements] = useState([]);
 
     useEffect(() => { //Update the rendered array with a delay for each element

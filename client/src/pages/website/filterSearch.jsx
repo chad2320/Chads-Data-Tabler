@@ -6,7 +6,7 @@ import Loading from '../../components/general/loading';
 import { useSelector } from 'react-redux';
 
 const FilterSearch = () => {
-  const {filtersData} = useSelector((store)=>store.filters)
+  const {filtersData} = useSelector((store)=>store.filterSearch)
 /* ------------------------Page Rendering--------------------------------- */
 
                       /* Waits for filters info from mongodb

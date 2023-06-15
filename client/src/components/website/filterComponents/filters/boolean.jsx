@@ -3,13 +3,12 @@ import Box from '@mui/material/Box';
 import NativeSelect from '@mui/material/NativeSelect';
 import React from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { modifySingleFilter } from '../../../../features/filters/filtersSlice';
-
+import { modifySingleFilter } from '../../../../features/search/filterSearch/filterSearchSlice';
 
 const BooleanCheckmark = ({path}) => {
     const dispatch = useDispatch()
     //Import the relevent data under the alias data through destructuring
-    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filters)
+    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filterSearch)
 
     const handleChange = (event) => {
         let result;

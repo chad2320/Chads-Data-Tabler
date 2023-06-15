@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/general/loading';
 import { useSelector , useDispatch } from 'react-redux';
 import BasicModal from './components/general/basicModal';
-import { getFilters } from './features/filters/filtersSlice';
+import { getFilters } from './features/search/filterSearch/filterSearchSlice';
 import { typographySettings } from './utils/typography';
 import { intializeEnabled } from './features/userGuide/userGuideSlice'
 

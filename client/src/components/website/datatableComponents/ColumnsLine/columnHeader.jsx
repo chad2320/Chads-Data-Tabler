@@ -7,14 +7,11 @@ import ClearIcon from '@mui/icons-material/Clear';
 import React from 'react';
 import {windowSizer} from '../../../../utils/windowSize'
 import { useSelector , useDispatch } from "react-redux";
-import { addColumns, modifySingleFilter } from "../../../../features/filters/filtersSlice";
-import { modifyControls } from "../../../../features/search/filterSearch/filterSearchSlice";
-import { getTableData } from "../../../../features/search/filterSearch/filterSearchSlice";
+import { modifyControls , getTableData , addColumns, modifySingleFilter} from "../../../../features/search/filterSearch/filterSearchSlice";
 
 const ColumnHeader = ({ item }) => {
     const dispatch = useDispatch()
-    const { columns } = useSelector((store)=>store.filters)
-    const { controls } = useSelector((store)=>store.filterSearch)
+    const {controls,columns} = useSelector((store)=>store.filterSearch)
 
     let {windowSize} = windowSizer()
     let itemWidth = windowSize.width < 420 ? '100px' : '200px'

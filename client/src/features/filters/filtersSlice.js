@@ -1,8 +1,8 @@
-import { createAsyncThunk,createSlice,current} from "@reduxjs/toolkit";
+/* import { createAsyncThunk,createSlice,current} from "@reduxjs/toolkit";
 import { getSearchKeyValuePairs } from "./helpers/getSearchKeyValuePairs";
 import { checkVisibility } from './helpers/checkVisibility'
 import axios from 'axios'
-import { buildFiltersList } from "./helpers/buildFiltersList";
+import { buildFiltersList } from "../search/filterSearch/helpers/buildFiltersList";
 import { setPalette , setColorOptions } from "../theme/themeSlice";
 
 const initialState = {
@@ -85,4 +85,4 @@ export const {
     addColumns
 } = filtersSlice.actions;
 
-export default filtersSlice.reducer;
+export default filtersSlice.reducer; */

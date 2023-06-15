@@ -3,11 +3,11 @@ import Grid from "@mui/material/Grid";
 import ColumnHeader from "./columnHeader";
 import React from 'react';
 import { useSelector , useDispatch } from "react-redux";
-import { modifySingleFilter , addColumns} from "../../../../features/filters/filtersSlice";
+import { modifySingleFilter , addColumns } from "../../../../features/search/filterSearch/filterSearchSlice";
 
 const ColumnsLine = () => {
     const dispatch = useDispatch()
-    const { columns , filtersList} = useSelector((store)=>store.filters)
+    const { columns , filtersList} = useSelector((store)=>store.filterSearch)
 
     return(
         <Box 

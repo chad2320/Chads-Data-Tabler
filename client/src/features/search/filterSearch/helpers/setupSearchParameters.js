@@ -1,28 +1,17 @@
 /* Grabs and formats data from state to be used in search */
-export const setupSearchParameters = (x) => {
-    //console.log('Starts with',x)
+export const setupSearchParameters = (x,y) => {
       let searchObject ={}
-      Object.keys(x).forEach(item =>{
-        if(
-          (x[item].type === 'dropdown' || 
-          x[item].type === 'range' || 
-          x[item].type === 'boolean') &&
-          x[item].visible === true //If not visible in ui, wont be included.
-        ){
-          let moddedData = x[item].data
-          if(x[item].type === 'range'){
-            moddedData = {
-              $gte:Number(x[item].data[0]),
-              $lte:Number(x[item].data[1])
-            }
+
+      x.map((filter)=>{
+        if(filter.type === 'range'){
+          searchObject[filter.path] = {
+            $gte:Number(y[filter.path].data[0]),
+            $lte:Number(y[filter.path].data[1])
           }
-          if(moddedData !== null){
-            searchObject[item] = moddedData
-          }
-          //Add an object with the data and type with a key that is
-          
+        } else if(y[filter.path].data !== null) { //If data is null dont include
+          searchObject[filter.path] = y[filter.path].data
         }
       })
-      //console.log('Formats To:\n',searchObject)
+      
       return searchObject
 }

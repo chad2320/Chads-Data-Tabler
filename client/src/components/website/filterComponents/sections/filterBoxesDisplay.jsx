@@ -11,7 +11,7 @@ import BooleanCheckmark from '../filters/boolean'
 //the filters.
 
 const FilterBoxesDisplay = () => {
-    const {autoCompleteValue} = useSelector((store) => store.filters)
+    const {autoCompleteValue} = useSelector((store) => store.filterSearch)
     //Handle window sizing.
     let {windowSize} = windowSizer()
     let {width} = windowSize

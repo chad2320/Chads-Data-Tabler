@@ -3,13 +3,13 @@ import Slider from '@mui/material/Slider';
 import { Typography,Tooltip } from '@mui/material';
 import React from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { modifySingleFilter } from '../../../../features/filters/filtersSlice';
+import { modifySingleFilter } from '../../../../features/search/filterSearch/filterSearchSlice';
 
 const RangeSlider = ({path}) => {
     const dispatch = useDispatch()
     
     //Import the relevent data under the alias data through destructuring
-    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filters)
+    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filterSearch)
 
     return(
     <Box 

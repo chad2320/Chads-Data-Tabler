@@ -4,13 +4,13 @@ import NativeSelect from '@mui/material/NativeSelect';
 import { Typography } from '@mui/material';
 import React from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { modifySingleFilter } from '../../../../features/filters/filtersSlice';
+import { modifySingleFilter } from '../../../../features/search/filterSearch/filterSearchSlice';
 
 const DefaultDropdown = ({path}) => {
     const dispatch = useDispatch()
 
     //Import the relevent data under the alias data through destructuring
-    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filters)
+    const { filtersData:{controlsObject:{ [path]: data }}} = useSelector((store) => store.filterSearch)
 
     const handleChange = (event) => { //If user selects Any set to null
       let result = event.target.value

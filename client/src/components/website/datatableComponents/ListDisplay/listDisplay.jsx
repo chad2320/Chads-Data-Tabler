@@ -1,14 +1,13 @@
 import { Box, Typography,Slide } from "@mui/material";
 import LineItem from "./lineItem";
 import React, { useState, useEffect } from 'react';
-import { useSearch } from "../../../../utils/filterSearch";
 import { TransitionGroup } from 'react-transition-group';
 import { useSelector } from "react-redux";
 
 const ListDisplay = () => {
-    const { tableData, controls, data } = useSearch();
+    const { tableData } = useSelector((store) => store.filterSearch);
+    const { searchKey } = useSelector((store) => store.filters)
     const [copiedElements, setCopiedElements] = useState([]);
-    const {searchKey} = useSelector((store) => store.filters)
 
     useEffect(() => { //Update the rendered array with a delay for each element
         let index = 0;
@@ -44,8 +43,6 @@ const ListDisplay = () => {
                     <LineItem
                         key={x._id}
                         tableData={x}
-                        data={data}
-                        controls={controls}
                         searchKey={searchKey}
                     />
                     </div>

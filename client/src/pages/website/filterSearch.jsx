@@ -3,10 +3,10 @@ import { Box } from '@mui/system';
 import FilterSearchBox from '../../components/website/filterComponents/filterSearchBox';
 import CustomDataTable from '../../components/website/datatableComponents/customDataTable';
 import Loading from '../../components/general/loading';
-import {useSearch} from '../../utils/filterSearch';
+import { useSelector } from 'react-redux';
 
 const FilterSearch = () => {
-const theFilterSearch = useSearch()
+  const {filtersData} = useSelector((store)=>store.filters)
 /* ------------------------Page Rendering--------------------------------- */
 
                       /* Waits for filters info from mongodb
@@ -18,7 +18,7 @@ const theFilterSearch = useSearch()
                       displaying anything. Which it controls
                       itself.*/
 
-    if(!theFilterSearch.data){return <Loading/>}
+    if(!filtersData){return <Loading/>}
     else{
       return(
           <Box sx={{pb:3}}>

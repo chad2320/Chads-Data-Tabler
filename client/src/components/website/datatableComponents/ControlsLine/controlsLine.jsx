@@ -3,7 +3,7 @@ import ListLength from "./listLength";
 import Pages from "./pages";
 import React from 'react';
 
-const ControlsLine = (props) => {
+const ControlsLine = () => {
     return (
         <Box 
             display="flex" 

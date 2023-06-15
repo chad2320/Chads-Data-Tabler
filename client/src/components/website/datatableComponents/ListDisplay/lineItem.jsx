@@ -2,28 +2,13 @@ import { Box, Typography} from "@mui/material"
 import Grid from "@mui/material/Grid";
 import LineItemData from "./lineItemDataDisplay";
 import React from 'react';
-import { useDispatch } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import { openModal } from "../../../../features/modal/modalSlice";
+import { flattenObject } from "../../../../helpers";
 
-const LineItem = ({tableData,data,searchKey}) => {
+const LineItem = ({tableData,searchKey}) => {
     const dispatch = useDispatch()
-    //Modal State & Handling
-
-
-    function flattenObject(obj, prefix = '') {
-        let flattenedObj = {};
-        for (let key in obj) {
-          if (obj.hasOwnProperty(key)) {
-            let newKey = prefix === '' ? key : prefix + '.' + key;
-            if (typeof obj[key] === 'object' && !Array.isArray(obj[key]) && obj[key] !== null) {
-              Object.assign(flattenedObj, flattenObject(obj[key], newKey));
-            } else {
-              flattenedObj[newKey] = obj[key];
-            }
-          }
-        }
-        return flattenedObj;
-      }
+    const { columns } = useSelector((store)=>store.filters)
 
     return (
         <Box>
@@ -60,21 +45,21 @@ const LineItem = ({tableData,data,searchKey}) => {
                 justifyContent='space-around'
                 alignItems="center"
                 >
-                {Object.keys(data).filter(item=>data[item].isColumn).map(item=>{
+                {columns.map(item=>{
                     let temp = flattenObject(tableData)
+                    
                     return(
                         <Grid 
                         item 
                         sx={{minWidth:'80px'}}
-                        key={item} 
+                        key={item.title} 
                         display='flex' 
                         justifyContent='center' 
                         >
                             <LineItemData 
-                                key={item} 
-                                data={temp[item]} 
-                                column={item}
-                                />
+                                key={item.title} 
+                                data={temp[item.path]} 
+                            />
 
                         </Grid>
                     )

@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/general/loading';
 import theThemer from './utils/themer';
 import { GuideProvider } from './utils/useGuides';
-import { FiltersProvider } from './utils/filterSearch/useFetchFilters';
 import { useSelector , useDispatch } from 'react-redux';
 import BasicModal from './components/general/basicModal';
 import { getFilters } from './features/filters/filtersSlice';
@@ -27,7 +26,6 @@ function App() {
 
   return (
     <ThemeProvider theme={themer.theme}>
-    <FiltersProvider>
     <GuideProvider>
     <CssBaseline />
     <BrowserRouter>
@@ -43,7 +41,6 @@ function App() {
           />
     </BrowserRouter>
     </GuideProvider>
-    </FiltersProvider>
     </ThemeProvider>
 
   );

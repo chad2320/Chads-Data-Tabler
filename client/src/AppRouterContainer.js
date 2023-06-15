@@ -3,7 +3,6 @@ import Loading from './components/general/loading';
 import {Routes, Route} from 'react-router-dom'
 import { AuthProvider } from './utils/auth';
 import { RequireAuth } from './utils/requireAuth';
-import {SearchProvider} from './utils/filterSearch'
 
 const LoginPage = lazy(() => import('./pages/admin/login'));
 const FilterSearch = lazy(() => import('./pages/website/filterSearch'));
@@ -13,11 +12,9 @@ const FiltersPage = lazy(() => import('./pages/admin/filtersPage'));
 const GeneralSettings = lazy(() => import('./pages/admin/generalSettings'));
 const ThemeForm = lazy(() => import('./pages/admin/themeForm'));
 
-
 const AppRouterContainer = ({colorOptions,setColorOptions}) => {
 
     return(
-        <SearchProvider>
         <AuthProvider>
         <Routes>
             <Route path="/" element={
@@ -60,7 +57,6 @@ const AppRouterContainer = ({colorOptions,setColorOptions}) => {
             }/>
         </Routes>
         </AuthProvider>
-        </SearchProvider>
     )
 }
 

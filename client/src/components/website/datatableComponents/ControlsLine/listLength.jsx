@@ -1,21 +1,20 @@
 import React from 'react';
 import { Box, Typography} from "@mui/material"
-import { useState} from "react";
 import { Button } from '@mui/material'
-import { useSearch } from "../../../../utils/filterSearch";
-
+import { useSelector , useDispatch } from 'react-redux';
+import { getTableData , modifyControls } from '../../../../features/search/filterSearch/filterSearchSlice';
 
 const ListLength = () => {
-    const {searchCountTotal,searchDatabase,controls,setControls} = useSearch()
-    const [clicked,setClicked] = useState(10)
+    const dispatch = useDispatch()
+    const {searchCountTotal,controls} = useSelector((store)=>store.filterSearch)
 
     function handleClick(x){
-        let temp = controls
-        temp.limit = x
-        temp.page = 0
-        setClicked(x)
-        setControls(temp)
-        searchDatabase(false)
+        dispatch(modifyControls({
+            key:'limit',
+            value:x
+        }))
+        dispatch(modifyControls({key:'page',value:0}))
+        dispatch(getTableData())
     }
 
     return (
@@ -35,7 +34,7 @@ const ListLength = () => {
                     style={{maxWidth: 45, maxHeight: 25, minWidth: 45, minHeight: 25}} 
                     variant='contained' 
                     onClick={()=>{handleClick(10)}} 
-                    color={clicked === 10? 'secondary':'primary'}
+                    color={controls.limit === 10? 'secondary':'primary'}
                 >
                     10
                 </Button>
@@ -45,7 +44,7 @@ const ListLength = () => {
                         variant='contained' 
                         onClick={()=>{handleClick(20)}} 
                         sx={{ml:0.5, mr:0.5}}
-                        color={clicked === 20? 'secondary':'primary'}
+                        color={controls.limit === 20? 'secondary':'primary'}
                     >
                         20
                     </Button>
@@ -57,7 +56,7 @@ const ListLength = () => {
                     style={{maxWidth: 45, maxHeight: 25, minWidth: 45, minHeight: 25}}
                     variant='contained' 
                     onClick={()=>{handleClick(30)}} 
-                    color={clicked === 30? 'secondary':'primary'}
+                    color={controls.limit === 30? 'secondary':'primary'}
                 >
                     30
                 </Button>

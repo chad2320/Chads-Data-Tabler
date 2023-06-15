@@ -1,13 +1,11 @@
 import { Box, Typography} from "@mui/material"
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { getFeetInches } from "../../../../helpers";
 import {windowSizer} from '../../../../utils/windowSize'
 import React from 'react';
 
-
 const LineItemData = (props) => {
-    const {data,column} = props
+    const {data} = props
     const {windowSize} = windowSizer()
     let itemWidth = windowSize.width < 420 ? '100px' : '200px'
     
@@ -24,13 +22,7 @@ const LineItemData = (props) => {
         return result;
     }
 
-    if(column === 'Height'){
-        return(
-            <Box sx={{minWidth:itemWidth,maxWidth:itemWidth}}>
-                <Typography noWrap align='center'>{getFeetInches(data)}</Typography>
-            </Box>
-        )
-    } else if(Array.isArray(data)){
+     if(Array.isArray(data)){
         return(
             <Box sx={{minWidth:itemWidth,maxWidth:itemWidth}}>
                 <Typography noWrap align='center' >

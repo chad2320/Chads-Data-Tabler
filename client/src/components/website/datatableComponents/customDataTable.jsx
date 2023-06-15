@@ -3,21 +3,19 @@ import ControlsLine from "./ControlsLine/controlsLine";
 import ColumnsLine from "./ColumnsLine/columnsLine";
 import ListDisplay from "./ListDisplay/listDisplay";
 import React from 'react';
-import {useSearch} from "../../../utils/filterSearch";
 import ExplainerSection from "../userGuides/explainerSection";
 import { useGuideInformation } from "../../../utils/useGuides";
+import { useSelector } from "react-redux";
 
 const CustomDataTable = () => {
-    const {tableData} = useSearch()
+    const {status} = useSelector((store) => store.filterSearch)
     const {guide} = useGuideInformation()
 
     return (
         <Box>
-            {(tableData.length > 0) ?
+            {(status !== 'idle') ?
             <Fade in timeout={300}>
-                <Box 
-                    sx={{mt:1,pl:0.5,pr:0.5}}
-                    >
+                <Box sx={{mt:1,pl:0.5,pr:0.5}}>
                     <ControlsLine /> 
                     <ColumnsLine />
                     <ListDisplay />

@@ -10,6 +10,7 @@ const initialState = {
     visibleFilters: null,
     autoCompleteValue: [],
     filtersList: [],
+    columns:[],
     status:'loading',
     error: null,
 };
@@ -47,6 +48,9 @@ const filtersSlice = createSlice({
             state.autoCompleteValue = state.autoCompleteValue.filter(
                 item => item.path !== action.payload
             )
+        },
+        addColumns:(state,action) => {
+            state.columns = action.payload
         }
     },
     extraReducers(builder){
@@ -61,10 +65,11 @@ const filtersSlice = createSlice({
                 state.searchKey = getSearchKeyValuePairs(action.payload.controlsObject)
                 state.visibleFilters = checkVisibility(action.payload.controlsObject)
                 state.filtersList = buildFiltersList(action.payload.controlsObject)
+                state.columns = Object.keys(action.payload.controlsObject).filter(item=>action.payload.controlsObject[item].isColumn).map(item=> action.payload.controlsObject[item])
             })
             .addCase(getFilters.rejected,(state,action)=>{
                 state.status = 'failed'
-                console.log(action.error.message)
+                console.log(action.payload)
             })
     }
 })
@@ -73,7 +78,8 @@ export const {
     updateVisibility,
     modifySingleFilter,
     addFilter2,
-    removeFilter
+    removeFilter,
+    addColumns
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

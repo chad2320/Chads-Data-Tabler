@@ -15,3 +15,18 @@ export function getFeetInches(x){
     return `${feet}'${inches}"`
 }
 
+export function flattenObject(obj, prefix = '') {
+    let flattenedObj = {};
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let newKey = prefix === '' ? key : prefix + '.' + key;
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key]) && obj[key] !== null) {
+          Object.assign(flattenedObj, flattenObject(obj[key], newKey));
+        } else {
+          flattenedObj[newKey] = obj[key];
+        }
+      }
+    }
+    return flattenedObj;
+}
+

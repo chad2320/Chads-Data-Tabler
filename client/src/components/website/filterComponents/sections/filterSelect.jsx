@@ -1,21 +1,17 @@
 import { Autocomplete,Chip,TextField, Box,Typography,CircularProgress,Button,Fade} from "@mui/material"
 import React from 'react';
-import useSelectFilters from "../../../../utils/filterSearch/useSelectFilters";
-import { useSearch } from "../../../../utils/filterSearch";
 import { useDispatch } from "react-redux";
 import { modifySingleFilter, updateVisibility, addFilter2, removeFilter } from "../../../../features/filters/filtersSlice";
 import { useSelector } from "react-redux";
+import { getTableData } from "../../../../features/search/filterSearch/filterSearchSlice";
 
 
 const FilterSelect = () => {
     const dispatch = useDispatch()
     const {filtersList,autoCompleteValue} = useSelector((store)=>store.filters)
-    const {addFilter,filtersAutocomplete,
-    setFiltersAutocomplete} = useSelectFilters()
-    let {searchCountTotal,searchDatabase,loading} = useSearch()
-    function capitalizeFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
+    const { searchCountTotal , status} = useSelector((store)=>store.filterSearch)
+    
+    
     //console.log(filtersAutocomplete)
 
 
@@ -53,7 +49,7 @@ const FilterSelect = () => {
                                 dispatch(updateVisibility())
                                 dispatch(addFilter2(newValue))
                             }}
-                            groupBy={(option)=> capitalizeFirstLetter(option.type)}
+                            groupBy={(option)=> option.type}
                             getOptionLabel={option => option.title}
                             renderTags={() => {}}
                             value={autoCompleteValue}
@@ -72,16 +68,13 @@ const FilterSelect = () => {
                             flexDirection='row'
                             alignItems='center'
                         >
-                            {loading && <CircularProgress size={20}/>}
-                            {!loading &&
+                            {status === 'loading' && <CircularProgress size={20}/>}
+                            {status === 'succeeded' &&
                                 <Fade in timeout={1000}>
                                     <Typography /* Shows total results found in search */
                                         variant='h5'
                                         noWrap
-                                        sx={{
-                                            ml:1,
-                                            mr:1
-                                        }}
+                                        sx={{ml:1,mr:1}}
                                     >
                                         {searchCountTotal === 0  ? null : 
                                             (searchCountTotal === -1 ? 
@@ -96,7 +89,7 @@ const FilterSelect = () => {
                                 size='small' 
                                 variant='contained'
                                 color='secondary'
-                                onClick={()=>searchDatabase(true)}
+                                onClick={()=>dispatch(getTableData())}
                             >
                                 Search
                             </Button>

@@ -1,12 +1,11 @@
-import './App.css';
 import React, { useEffect } from 'react';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import Topbar from './scenes/website/websiteTopBar';
+import Topbar from './components/shared/topBar/websiteTopBar';
 import AppRouterContainer from './AppRouterContainer'
 import { BrowserRouter } from 'react-router-dom';
-import Loading from './components/general/loading';
+import Loading from './components/shared/loading';
 import { useSelector , useDispatch } from 'react-redux';
-import BasicModal from './components/general/basicModal';
+import BasicModal from './components/shared/basicModal';
 import { getFilters } from './features/search/filterSearch/filterSearchSlice';
 import { typographySettings } from './utils/typography';
 import { intializeEnabled } from './features/userGuide/userGuideSlice'
@@ -16,7 +15,7 @@ function App() {
   let { palette , colorMode} = useSelector((store)=>store.theme)
   const dispatch = useDispatch()
   
-  useEffect(()=>{
+  useEffect(()=>{ 
     dispatch(intializeEnabled())
     dispatch(getFilters())
   },[])

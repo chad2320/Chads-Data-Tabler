@@ -4,6 +4,7 @@ import stringSearchReducer from './features/search/stringSearch/stringSearchSlic
 import filterSearchReducer from './features/search/filterSearch/filterSearchSlice';
 import filtersReducer from './features/filters/filtersSlice';
 import themeReducer from './features/theme/themeSlice';
+import userGuideReducer from './features/userGuide/userGuideSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
       filters: filtersReducer,
       filterSearch: filterSearchReducer,
       theme:themeReducer,
+      userGuide: userGuideReducer,
     },
   });

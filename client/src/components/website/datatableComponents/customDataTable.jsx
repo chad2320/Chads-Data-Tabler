@@ -4,12 +4,12 @@ import ColumnsLine from "./ColumnsLine/columnsLine";
 import ListDisplay from "./ListDisplay/listDisplay";
 import React from 'react';
 import ExplainerSection from "../userGuides/explainerSection";
-import { useGuideInformation } from "../../../utils/useGuides";
 import { useSelector } from "react-redux";
 
 const CustomDataTable = () => {
     const {status} = useSelector((store) => store.filterSearch)
-    const {guide} = useGuideInformation()
+    const {visibleFilters} = useSelector((store) => store.filters)
+    const {enabled} = useSelector((store) => store.userGuide)
 
     return (
         <Box>
@@ -22,14 +22,14 @@ const CustomDataTable = () => {
                 </Box>
             </Fade> 
             : 
-            (guide.enabled && guide.current === 'addFilter') ?
+            (enabled && !visibleFilters) ?
                 <ExplainerSection
                     text='Try adding some filters to your search!'
                     arrow={true}
                     guideButton={true}
                 /> 
             :
-            (guide.enabled && guide.current === 'useFilter') ?
+            (enabled && visibleFilters) ?
                 <ExplainerSection
                     text='Edit your filters parameters then hit search!'
                     arrow={false}

@@ -5,11 +5,11 @@ import Topbar from './scenes/website/websiteTopBar';
 import AppRouterContainer from './AppRouterContainer'
 import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/general/loading';
-import { GuideProvider } from './utils/useGuides';
 import { useSelector , useDispatch } from 'react-redux';
 import BasicModal from './components/general/basicModal';
 import { getFilters } from './features/filters/filtersSlice';
 import { typographySettings } from './utils/typography';
+import { intializeEnabled } from './features/userGuide/userGuideSlice'
 
 function App() {
   let {isOpen} = useSelector((store)=>store.modal)
@@ -17,6 +17,7 @@ function App() {
   const dispatch = useDispatch()
   
   useEffect(()=>{
+    dispatch(intializeEnabled())
     dispatch(getFilters())
   },[])
   
@@ -32,14 +33,12 @@ function App() {
       })
       }
     >
-    <GuideProvider>
     <CssBaseline />
     <BrowserRouter>
         {isOpen && <BasicModal/>}
         <Topbar />
         <AppRouterContainer/>
     </BrowserRouter>
-    </GuideProvider>
     </ThemeProvider>
 
   );

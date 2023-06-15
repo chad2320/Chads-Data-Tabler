@@ -5,16 +5,11 @@ import { modifySingleFilter, updateVisibility, addFilter2, removeFilter } from "
 import { useSelector } from "react-redux";
 import { getTableData } from "../../../../features/search/filterSearch/filterSearchSlice";
 
-
 const FilterSelect = () => {
     const dispatch = useDispatch()
     const {filtersList,autoCompleteValue} = useSelector((store)=>store.filters)
     const { searchCountTotal , status} = useSelector((store)=>store.filterSearch)
     
-    
-    //console.log(filtersAutocomplete)
-
-
     if(filtersList.length > 0){
         return (
             <Box 
@@ -89,7 +84,10 @@ const FilterSelect = () => {
                                 size='small' 
                                 variant='contained'
                                 color='secondary'
-                                onClick={()=>dispatch(getTableData())}
+                                onClick={()=>{
+                                    dispatch(getTableData())
+                                }
+                            }
                             >
                                 Search
                             </Button>

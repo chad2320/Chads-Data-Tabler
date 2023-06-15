@@ -5,14 +5,14 @@ import SearchSearchBar from "../../components/general/searchSearchBar";
 import {Link} from 'react-router-dom'
 import React from 'react';
 import InfoIcon from '@mui/icons-material/Info';
-import {useGuideInformation} from '../../utils/useGuides'
 import { useSelector , useDispatch } from "react-redux";
 import { reverseColorMode } from "../../features/theme/themeSlice";
+import { toggleUserGuideEnabled } from "../../features/userGuide/userGuideSlice";
 
 const Topbar = () => {
   const dispatch = useDispatch()
   const { colorMode } = useSelector((store)=>store.theme)
-  const { guide, setGuide } = useGuideInformation();
+  const { enabled } = useSelector((store)=>store.userGuide)
 
   return (
     <Box 
@@ -39,10 +39,14 @@ const Topbar = () => {
       {/* Color Mode Toggle */}
       <Box display="flex">
         <Tooltip 
-          title={guide.enabled ? 'Disable Guides' : 'Enable Guides'}
+          title={enabled ? 'Disable Guides' : 'Enable Guides'}
           placement='left'
         >
-          <IconButton onClick={()=>setGuide('enabled',!guide.enabled)}>
+          <IconButton onClick={()=>{
+            dispatch(toggleUserGuideEnabled())
+            }
+          }
+          >
             <InfoIcon/>
           </IconButton>
         </Tooltip>

@@ -18,7 +18,7 @@ const initialState = {
 
 const url = `${process.env.REACT_APP_Express_Connection}filters`
 
-export const getFilters = createAsyncThunk('fitlers/getFilters',
+export const getFilters = createAsyncThunk('filters/getFilters',
     async (_,thunkAPI) => {
         try {
             const response = await axios(url)

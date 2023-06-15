@@ -14,4 +14,4 @@ export function checkVisibility(obj) {
     }
     
     return false;
-  }
+}

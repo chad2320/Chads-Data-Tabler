@@ -2,10 +2,11 @@ import React from 'react';
 import { Box,Button,Fade, Typography} from "@mui/material"
 import ShortcutIcon from '@mui/icons-material/Shortcut';
 import InfoIcon from '@mui/icons-material/Info';
-import { useGuideInformation } from '../../../utils/useGuides';
+import { useDispatch } from 'react-redux';
+import { toggleUserGuideEnabled } from '../../../features/userGuide/userGuideSlice';
 
 const ExplainerSection = ({text,arrow,guideButton}) => {
-    const {guide,setGuide} = useGuideInformation()
+    const dispatch = useDispatch()
 
     return (
         <Fade in timeout={3000}>
@@ -53,7 +54,9 @@ const ExplainerSection = ({text,arrow,guideButton}) => {
                             variant='contained'
                             color='secondary'
                             sx={{width:125,p:0.2,mr:2}}
-                            onClick={()=>{setGuide('enabled',!guide.enabled)}}
+                            onClick={()=>{
+                                dispatch(toggleUserGuideEnabled())
+                            }}
                         >
                             Turn Off Guides {<InfoIcon sx={{ml:0.2,fontSize:14}}/>}
                         </Button>

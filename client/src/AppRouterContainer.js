@@ -1,23 +1,20 @@
 import React,{Suspense,lazy} from 'react';
-import Loading from './components/general/loading';
+import Loading from './components/shared/loading';
 import {Routes, Route} from 'react-router-dom'
 import { AuthProvider } from './utils/auth';
 import { RequireAuth } from './utils/requireAuth';
-import {SearchProvider} from './utils/filterSearch'
 
-const LoginPage = lazy(() => import('./pages/admin/login'));
-const FilterSearch = lazy(() => import('./pages/website/filterSearch'));
-const ErrorPage = lazy(() => import('./pages/website/errorPage'));
-const MainPage = lazy(() => import('./pages/admin/mainPage'));
-const FiltersPage = lazy(() => import('./pages/admin/filtersPage'));
-const GeneralSettings = lazy(() => import('./pages/admin/generalSettings'));
-const ThemeForm = lazy(() => import('./pages/admin/themeForm'));
+const LoginPage = lazy(() => import('./components/admin/pages/login'));
+const FilterSearch = lazy(() => import('./components/website/pages/filterSearch/filterSearch'));
+const ErrorPage = lazy(() => import('./components/website/pages/errorPage'));
+const MainPage = lazy(() => import('./components/admin/pages/mainPage/mainPage'));
+const FiltersPage = lazy(() => import('./components/admin/pages/filtersPage/filtersPage'));
+const GeneralSettings = lazy(() => import('./components/admin/pages/generalSettings'));
+const ThemeForm = lazy(() => import('./components/admin/pages/themeForm/themeForm'));
 
-
-const AppRouterContainer = ({colorOptions,setColorOptions}) => {
+const AppRouterContainer = () => {
 
     return(
-        <SearchProvider>
         <AuthProvider>
         <Routes>
             <Route path="/" element={
@@ -51,16 +48,12 @@ const AppRouterContainer = ({colorOptions,setColorOptions}) => {
             <Route path="/admin/theme" element={
                 <RequireAuth>
                     <Suspense fallback={<Loading/>}>
-                        <ThemeForm
-                            colorOptions={colorOptions}
-                            setColorOptions={setColorOptions}
-                            />
+                        <ThemeForm />
                     </Suspense>
                 </RequireAuth>
             }/>
         </Routes>
         </AuthProvider>
-        </SearchProvider>
     )
 }
 

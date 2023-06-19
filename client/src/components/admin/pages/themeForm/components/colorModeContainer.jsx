@@ -2,18 +2,14 @@ import React from "react";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import ColorInput from "./colorInput";
 import LineItemSample from "./lineItemSample";
-import editThemeData from "../../../../../CRUD Operations/editThemeData";
 import { windowSizer } from "../../../../../utils/windowSize";
+import { useSelector , useDispatch } from "react-redux";
+import { saveColorOptionsToMongo } from "../../../../../features/theme/themeSlice";
 
-function ColorModeContainer (props) {
-    let {colorOptions,mode,handleSetColorOptions} = props
+function ColorModeContainer ({mode}) {
+    const dispatch = useDispatch()
+    let {colorOptions} = useSelector((store)=>store.theme)
     let {windowSize} = windowSizer()
-    console.log(windowSize.width)
-
-    function triggerSetColors(){
-        console.log('color options',colorOptions)
-        editThemeData(colorOptions)
-    }
 
 return(
     <Box
@@ -55,19 +51,16 @@ return(
                     title='Primary Color:'
                     colors={colorOptions}
                     path={[mode,'primary','main']}
-                    handleSetColorOptions={handleSetColorOptions}
                 />
                 <ColorInput
                     title='Secondary Color:'
                     colors={colorOptions}
                     path={[mode,'secondary','main']}
-                    handleSetColorOptions={handleSetColorOptions}
                 />
                 <ColorInput
                     title='Neutral Color:'
                     colors={colorOptions}
                     path={[mode,'neutral','main']}
-                    handleSetColorOptions={handleSetColorOptions}
                 />
             </Box>
             <Box
@@ -78,13 +71,11 @@ return(
                     title='Background Color:'
                     colors={colorOptions}
                     path={[mode,'background','default']}
-                    handleSetColorOptions={handleSetColorOptions}
                 />
                 <ColorInput
                     title='Text Color:'
                     colors={colorOptions}
                     path={[mode,'text','primary']}
-                    handleSetColorOptions={handleSetColorOptions}
                 />
                 <Box
                     sx={{
@@ -104,7 +95,7 @@ return(
                             borderColor:colorOptions[mode].primary.main,
                             color:colorOptions[mode].primary.main
                         }}
-                        onClick={triggerSetColors}
+                        onClick={()=>dispatch(saveColorOptionsToMongo())}
                         variant='outlined'
                         size='small'
                     >

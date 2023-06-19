@@ -1,10 +1,13 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { editSingleColorOption } from "../../../../../features/theme/themeSlice";
 
-function ColorInput ({title,colors,path,handleSetColorOptions}){
+function ColorInput ({title,colors,path}){
+    const dispatch = useDispatch()
 
     function handleInputChange(event){
-        handleSetColorOptions(path,event.target.value)
+        dispatch(editSingleColorOption({path:path,value:event.target.value}))
     }
 
     return (
